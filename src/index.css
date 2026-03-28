@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a3a5c;
+  --color-primary-light: #2d5f8a;
+  --color-accent: #00b8d4;
+  --color-accent-light: #4dd0e1;
+  --color-ehaco-bg: #f5f7fa;
+  --color-ehaco-text: #333333;
+  --color-ehaco-border: #e0e4e8;
+}
+
+@layer base {
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    color: var(--color-ehaco-text);
+    background-color: var(--color-ehaco-bg);
+    margin: 0;
+  }
+}
