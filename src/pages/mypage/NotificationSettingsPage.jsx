@@ -80,14 +80,15 @@ export default function NotificationSettingsPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         <MypageSidebar activePage="notification-settings" />
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold text-ehaco-text">お知らせ設定</h1>
-            <p className="text-sm text-gray-500 mt-1">
+          <div className="mb-8">
+            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">お知らせ設定</h1>
+            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+            <p className="text-sm text-gray-500 mt-3">
               受け取る通知の種類と配信方法を設定できます
             </p>
           </div>

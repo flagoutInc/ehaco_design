@@ -37,14 +37,15 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         <MypageSidebar activePage="profile" />
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           {/* Header */}
-          <h1 className="text-2xl font-bold text-ehaco-text mb-6">
-            プロフィール設定
-          </h1>
+          <div className="mb-8">
+            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">プロフィール設定</h1>
+            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+          </div>
 
           {/* Avatar */}
           <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
@@ -73,7 +74,7 @@ export default function ProfilePage() {
             <h2 className="text-lg font-bold text-ehaco-text mb-4">
               基本情報
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-ehaco-text mb-1.5">
                   氏名
@@ -126,7 +127,7 @@ export default function ProfilePage() {
             <h2 className="text-lg font-bold text-ehaco-text mb-4">
               興味のあるカテゴリ
             </h2>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {categories.map((category) => {
                 const isChecked = selectedCategories.has(category);
                 return (

@@ -5,6 +5,7 @@ const navItems = [
   {
     key: 'dashboard',
     label: 'ダッシュボード',
+    shortLabel: 'ダッシュボード',
     to: '/mypage/dashboard',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -15,6 +16,7 @@ const navItems = [
   {
     key: 'events',
     label: '申込済みイベント',
+    shortLabel: '申込済み',
     to: '/mypage/events',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -25,6 +27,7 @@ const navItems = [
   {
     key: 'favorites',
     label: 'お気に入り',
+    shortLabel: 'お気に入り',
     to: '/mypage/favorites',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -35,6 +38,7 @@ const navItems = [
   {
     key: 'notifications',
     label: 'お知らせ',
+    shortLabel: 'お知らせ',
     to: '/mypage/notifications',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -45,6 +49,7 @@ const navItems = [
   {
     key: 'profile',
     label: 'プロフィール設定',
+    shortLabel: 'プロフィール',
     to: '/mypage/profile',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -55,6 +60,7 @@ const navItems = [
   {
     key: 'account',
     label: 'アカウント設定',
+    shortLabel: 'アカウント',
     to: '/mypage/account',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -66,6 +72,7 @@ const navItems = [
   {
     key: 'notification-settings',
     label: 'お知らせ設定',
+    shortLabel: '通知設定',
     to: '/mypage/notification-settings',
     icon: (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -77,46 +84,78 @@ const navItems = [
 
 export default function MypageSidebar({ activePage }) {
   return (
-    <aside className="sticky top-20 w-60 shrink-0 overflow-hidden rounded-xl border border-ehaco-border bg-white shadow-sm">
-      {/* User info */}
-      <div className="border-b border-ehaco-border p-4">
-        <div className="flex items-center gap-3">
-          <img
-            src={user.avatar}
-            alt={user.name}
-            className="h-12 w-12 rounded-full"
-          />
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-ehaco-text">
-              {user.name}
-            </p>
-            <p className="truncate text-xs text-gray-500">{user.company}</p>
-          </div>
+    <>
+      {/* Mobile: horizontal scroll tab nav */}
+      <div className="relative mb-4 -mx-4 md:hidden">
+        <div className="overflow-x-auto scrollbar-hide">
+        <div className="flex gap-1.5 px-4 py-2">
+          {navItems.map((item) => {
+            const isActive = activePage === item.key;
+            return (
+              <Link
+                key={item.key}
+                to={item.to}
+                className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition ${
+                  isActive
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'bg-white text-gray-600 border border-ehaco-border hover:bg-gray-100'
+                }`}
+              >
+                <span className={`${isActive ? 'text-primary' : 'text-gray-400'} [&>svg]:h-4 [&>svg]:w-4`}>
+                  {item.icon}
+                </span>
+                {item.shortLabel}
+              </Link>
+            );
+          })}
         </div>
+        </div>
+        {/* Right fade gradient for scroll hint */}
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-ehaco-bg to-transparent" />
       </div>
 
-      {/* Navigation */}
-      <nav className="p-2">
-        {navItems.map((item) => {
-          const isActive = activePage === item.key;
-          return (
-            <Link
-              key={item.key}
-              to={item.to}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
-                isActive
-                  ? 'bg-accent/10 font-medium text-primary'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              <span className={isActive ? 'text-primary' : 'text-gray-400'}>
-                {item.icon}
-              </span>
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
-    </aside>
+      {/* PC: sidebar */}
+      <aside className="sticky top-20 hidden w-60 shrink-0 overflow-hidden rounded-xl border border-ehaco-border bg-white shadow-sm md:block">
+        {/* User info */}
+        <div className="border-b border-ehaco-border px-5 py-5">
+          <div className="flex items-center gap-3">
+            <img
+              src={user.avatar}
+              alt={user.name}
+              className="h-14 w-14 rounded-full ring-2 ring-ehaco-border"
+            />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-ehaco-text">
+                {user.name}
+              </p>
+              <p className="truncate text-xs text-gray-500">{user.company}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="p-3">
+          {navItems.map((item) => {
+            const isActive = activePage === item.key;
+            return (
+              <Link
+                key={item.key}
+                to={item.to}
+                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
+                  isActive
+                    ? 'bg-accent/10 font-medium text-primary border-l-2 border-l-accent'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <span className={isActive ? 'text-primary' : 'text-gray-400'}>
+                  {item.icon}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </aside>
+    </>
   );
 }

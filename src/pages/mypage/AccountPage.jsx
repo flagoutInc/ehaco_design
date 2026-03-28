@@ -39,14 +39,15 @@ const externalAccounts = [
 
 export default function AccountPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         <MypageSidebar activePage="account" />
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           {/* Header */}
-          <h1 className="text-2xl font-bold text-ehaco-text mb-6">
-            アカウント設定
-          </h1>
+          <div className="mb-8">
+            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">アカウント設定</h1>
+            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+          </div>
 
           {/* Email */}
           <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">

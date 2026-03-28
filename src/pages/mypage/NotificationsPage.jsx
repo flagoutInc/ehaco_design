@@ -80,30 +80,33 @@ export default function NotificationsPage() {
       : notifData;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex gap-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         <MypageSidebar activePage="notifications" />
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-ehaco-text">お知らせ</h1>
+              <div>
+                <h1 className="text-xl md:text-2xl font-black text-ehaco-text">お知らせ</h1>
+                <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+              </div>
               {unreadCount > 0 && (
                 <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                   {unreadCount}件未読
                 </span>
               )}
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
               <button
                 onClick={markAllAsRead}
-                className="text-sm text-accent hover:text-accent-light transition"
+                className="text-xs md:text-sm text-accent hover:text-accent-light transition"
               >
                 すべて既読にする
               </button>
               <Link
                 to="/mypage/notification-settings"
-                className="text-sm text-gray-500 hover:text-ehaco-text transition flex items-center gap-1"
+                className="text-xs md:text-sm text-gray-500 hover:text-ehaco-text transition flex items-center gap-1"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -136,65 +139,82 @@ export default function NotificationsPage() {
 
           {/* Notification list */}
           {filteredNotifications.length > 0 ? (
-            <div className="bg-white rounded-xl border border-ehaco-border overflow-hidden">
-              {filteredNotifications.map((notif, index) => {
-                const isRead = readState.get(notif.id);
-                const config = typeConfig[notif.type] || typeConfig.system;
+            <div className="space-y-4">
+              {(() => {
+                const getDateGroup = (dateRelative) => {
+                  if (dateRelative.includes('時間前') || dateRelative.includes('分前')) return '今日';
+                  if (dateRelative.includes('昨日')) return '昨日';
+                  return '今週';
+                };
+                let lastGroup = null;
+                return filteredNotifications.map((notif, index) => {
+                  const isRead = readState.get(notif.id);
+                  const config = typeConfig[notif.type] || typeConfig.system;
+                  const group = getDateGroup(notif.dateRelative);
+                  const showGroupHeader = group !== lastGroup;
+                  lastGroup = group;
 
-                return (
-                  <button
-                    key={notif.id}
-                    onClick={() => markAsRead(notif.id)}
-                    className={`w-full text-left flex items-start gap-4 px-5 py-4 transition hover:bg-gray-50 ${
-                      index < filteredNotifications.length - 1
-                        ? 'border-b border-ehaco-border'
-                        : ''
-                    } ${
-                      !isRead
-                        ? 'bg-blue-50/50 border-l-2 border-l-accent'
-                        : ''
-                    }`}
-                  >
-                    {/* Type icon */}
-                    <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${config.color}`}
-                    >
-                      {config.icon}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <p
-                        className={`text-sm ${
+                  return (
+                    <div key={notif.id}>
+                      {showGroupHeader && (
+                        <div className="flex items-center gap-3 mb-3 mt-2">
+                          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{group}</span>
+                          <div className="flex-1 h-px bg-ehaco-border" />
+                        </div>
+                      )}
+                      <button
+                        onClick={() => markAsRead(notif.id)}
+                        className={`w-full text-left flex items-start gap-4 px-5 py-5 bg-white rounded-xl border border-ehaco-border transition hover:shadow-md ${
                           !isRead
-                            ? 'font-bold text-ehaco-text'
-                            : 'font-medium text-ehaco-text'
+                            ? 'border-l-4 border-l-accent bg-blue-50/30'
+                            : ''
                         }`}
                       >
-                        {notif.title}
-                      </p>
-                      <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">
-                        {notif.message}
-                      </p>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {notif.dateRelative}
-                      </p>
-                    </div>
+                        {/* Type icon */}
+                        <div
+                          className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${config.color}`}
+                        >
+                          {config.icon}
+                        </div>
 
-                    {/* Unread dot */}
-                    {!isRead && (
-                      <span className="w-2.5 h-2.5 rounded-full bg-accent shrink-0 mt-2" />
-                    )}
-                  </button>
-                );
-              })}
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <p
+                            className={`text-sm ${
+                              !isRead
+                                ? 'font-bold text-ehaco-text'
+                                : 'font-medium text-ehaco-text'
+                            }`}
+                          >
+                            {notif.title}
+                          </p>
+                          <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">
+                            {notif.message}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {notif.dateRelative}
+                          </p>
+                        </div>
+
+                        {/* Unread dot */}
+                        {!isRead && (
+                          <span className="w-2.5 h-2.5 rounded-full bg-accent shrink-0 mt-2" />
+                        )}
+                      </button>
+                    </div>
+                  );
+                });
+              })()}
             </div>
           ) : (
             <div className="bg-white rounded-xl border border-ehaco-border p-12 text-center">
-              <svg className="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-              <p className="text-gray-500">未読のお知らせはありません</p>
+              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+              </div>
+              <p className="font-bold text-ehaco-text mb-1">未読のお知らせはありません</p>
+              <p className="text-sm text-gray-500">新しいお知らせが届くとここに表���されます</p>
             </div>
           )}
         </div>
