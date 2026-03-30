@@ -25,9 +25,8 @@ export default function FavoritesPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
-      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-        <MypageSidebar activePage="favorites" />
-        <div className="flex-1 min-w-0">
+      <MypageSidebar activePage="favorites" />
+      <div className="mt-6">
           {/* Header */}
           <div className="flex items-center gap-3 mb-8">
             <div>
@@ -41,10 +40,10 @@ export default function FavoritesPage() {
 
           {/* Grid */}
           {favoriteEvents.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="space-y-4">
               {favoriteEvents.map((event) => (
                 <div key={event.id} className="relative">
-                  <EventCard event={event} variant="vertical" />
+                  <EventCard event={event} variant="horizontal" />
                   {/* Heart overlay */}
                   <button
                     onClick={(e) => {
@@ -94,7 +93,6 @@ export default function FavoritesPage() {
               </Link>
             </div>
           )}
-        </div>
       </div>
     </div>
   );

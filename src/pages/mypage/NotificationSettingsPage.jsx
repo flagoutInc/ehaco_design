@@ -81,9 +81,8 @@ export default function NotificationSettingsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
-      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-        <MypageSidebar activePage="notification-settings" />
-        <div className="flex-1 min-w-0">
+      <MypageSidebar activePage="notification-settings" />
+      <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-xl md:text-2xl font-black text-ehaco-text">お知らせ設定</h1>
@@ -202,7 +201,6 @@ export default function NotificationSettingsPage() {
               設定を保存
             </button>
           </div>
-        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const typeConfig = {
   event: {
     color: 'bg-accent text-white',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
     ),
@@ -15,7 +15,7 @@ const typeConfig = {
   reminder: {
     color: 'bg-amber-500 text-white',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
@@ -23,7 +23,7 @@ const typeConfig = {
   recommend: {
     color: 'bg-purple-500 text-white',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
       </svg>
     ),
@@ -31,7 +31,7 @@ const typeConfig = {
   organizer: {
     color: 'bg-green-500 text-white',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
       </svg>
     ),
@@ -39,12 +39,37 @@ const typeConfig = {
   system: {
     color: 'bg-gray-400 text-white',
     icon: (
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
   },
 };
+
+const GROUP_ORDER = ['今日', '昨日', '今週', 'それ以前'];
+
+function getDateGroup(dateRelative) {
+  if (dateRelative.includes('時間前') || dateRelative.includes('分前')) return '今日';
+  if (dateRelative.includes('昨日')) return '昨日';
+  const dayMatch = dateRelative.match(/(\d+)日前/);
+  if (dayMatch && parseInt(dayMatch[1], 10) <= 7) return '今週';
+  return 'それ以前';
+}
+
+function groupNotifications(notifications) {
+  const groups = new Map();
+  for (const group of GROUP_ORDER) {
+    groups.set(group, []);
+  }
+  for (const notif of notifications) {
+    const group = getDateGroup(notif.dateRelative);
+    groups.get(group).push(notif);
+  }
+  // Return only non-empty groups in order
+  return GROUP_ORDER
+    .filter((g) => groups.get(g).length > 0)
+    .map((g) => ({ label: g, items: groups.get(g) }));
+}
 
 const filterTabs = ['すべて', '未読のみ'];
 
@@ -81,9 +106,8 @@ export default function NotificationsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
-      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-        <MypageSidebar activePage="notifications" />
-        <div className="flex-1 min-w-0">
+      <MypageSidebar activePage="notifications" />
+      <div className="mt-6">
           {/* Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div className="flex items-center gap-3">
@@ -137,40 +161,24 @@ export default function NotificationsPage() {
             ))}
           </div>
 
-          {/* Notification list */}
+          {/* Notification list — flat card style */}
           {filteredNotifications.length > 0 ? (
-            <div className="space-y-4">
-              {(() => {
-                const getDateGroup = (dateRelative) => {
-                  if (dateRelative.includes('時間前') || dateRelative.includes('分前')) return '今日';
-                  if (dateRelative.includes('昨日')) return '昨日';
-                  return '今週';
-                };
-                let lastGroup = null;
-                return filteredNotifications.map((notif, index) => {
-                  const isRead = readState.get(notif.id);
-                  const config = typeConfig[notif.type] || typeConfig.system;
-                  const group = getDateGroup(notif.dateRelative);
-                  const showGroupHeader = group !== lastGroup;
-                  lastGroup = group;
+            <div>
+                  {filteredNotifications.map((notif) => {
+                    const isRead = readState.get(notif.id);
+                    const config = typeConfig[notif.type] || typeConfig.system;
 
-                  return (
-                    <div key={notif.id}>
-                      {showGroupHeader && (
-                        <div className="flex items-center gap-3 mb-3 mt-2">
-                          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{group}</span>
-                          <div className="flex-1 h-px bg-ehaco-border" />
-                        </div>
-                      )}
+                    return (
                       <button
+                        key={notif.id}
                         onClick={() => markAsRead(notif.id)}
-                        className={`w-full text-left flex items-start gap-4 px-5 py-5 bg-white rounded-xl border border-ehaco-border transition hover:shadow-md ${
+                        className={`w-full text-left flex items-start gap-4 p-4 mb-3 rounded-2xl ring-1 transition hover:shadow-md ${
                           !isRead
-                            ? 'border-l-4 border-l-accent bg-blue-50/30'
-                            : ''
+                            ? 'ring-[#6366f1]/20 bg-[#6366f1]/5'
+                            : 'ring-ehaco-border/50 bg-white'
                         }`}
                       >
-                        {/* Type icon */}
+                        {/* Type color dot & icon */}
                         <div
                           className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${config.color}`}
                         >
@@ -188,36 +196,33 @@ export default function NotificationsPage() {
                           >
                             {notif.title}
                           </p>
-                          <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">
+                          <p className="text-sm text-[#64748b] mt-0.5 line-clamp-2">
                             {notif.message}
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-[#64748b] mt-1">
                             {notif.dateRelative}
                           </p>
                         </div>
 
                         {/* Unread dot */}
                         {!isRead && (
-                          <span className="w-2.5 h-2.5 rounded-full bg-accent shrink-0 mt-2" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#6366f1] shrink-0 mt-2" />
                         )}
                       </button>
-                    </div>
-                  );
-                });
-              })()}
+                    );
+                  })}
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-ehaco-border p-12 text-center">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-12 text-center">
               <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
               </div>
               <p className="font-bold text-ehaco-text mb-1">未読のお知らせはありません</p>
-              <p className="text-sm text-gray-500">新しいお知らせが届くとここに表���されます</p>
+              <p className="text-sm text-[#64748b]">新しいお知らせが届くとここに表示されます</p>
             </div>
           )}
-        </div>
       </div>
     </div>
   );

@@ -1,36 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1a3a5c;
-  --color-primary-light: #2d5f8a;
-  --color-accent: #00b8d4;
-  --color-accent-light: #4dd0e1;
-  --color-ehaco-bg: #eef1f6;
-  --color-ehaco-text: #1a1a2e;
-  --color-ehaco-border: #e0e4e8;
+  /* --- Modern Dark Palette --- */
+  --color-primary: #0f172a;
+  --color-primary-light: #1e293b;
+  --color-accent: #6366f1;
+  --color-accent-light: #818cf8;
+  --color-ehaco-bg: #f8fafc;
+  --color-ehaco-text: #0f172a;
+  --color-ehaco-border: #e2e8f0;
   --color-gold: #f59e0b;
   --color-gold-light: #fbbf24;
-  --color-section-tint: #f0f4ff;
-  --color-section-warm: #fff8f0;
+  --color-section-tint: #f1f5f9;
+  --color-section-warm: #faf5ff;
+  --color-muted: #64748b;
 }
 
 @layer base {
   body {
-    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    font-family: 'Inter', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
     color: var(--color-ehaco-text);
     background-color: var(--color-ehaco-bg);
     margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer utilities {
   .hero-scrim {
     background: linear-gradient(
-      to bottom,
-      rgba(26, 58, 92, 0.50) 0%,
-      rgba(26, 58, 92, 0.70) 50%,
-      rgba(26, 58, 92, 0.90) 100%
+      135deg,
+      rgba(15, 23, 42, 0.95) 0%,
+      rgba(30, 41, 59, 0.85) 50%,
+      rgba(99, 102, 241, 0.15) 100%
     );
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 }
 

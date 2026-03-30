@@ -21,9 +21,8 @@ export default function MyEventsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
-      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-        <MypageSidebar activePage="events" />
-        <div className="flex-1 min-w-0">
+      <MypageSidebar activePage="events" />
+      <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-xl md:text-2xl font-black text-ehaco-text">申込済みイベント</h1>
@@ -133,7 +132,6 @@ export default function MyEventsPage() {
               </Link>
             </div>
           )}
-        </div>
       </div>
     </div>
   );
