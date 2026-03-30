@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
-export default function EventCard({ event, variant = 'vertical' }) {
+export default function EventCard({ event, variant = 'vertical', className = '' }) {
   if (variant === 'horizontal') {
     return <HorizontalCard event={event} />;
   }
-  return <VerticalCard event={event} />;
+  return <VerticalCard event={event} className={className} />;
 }
 
-function VerticalCard({ event }) {
+function VerticalCard({ event, className = '' }) {
   return (
     <Link
       to={`/event/${event.id}`}
-      className="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ehaco-border/50 transition duration-300 md:hover:-translate-y-1 hover:shadow-xl hover:ring-accent/20"
+      className={`group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ehaco-border/50 transition duration-300 md:hover:-translate-y-1 hover:shadow-xl hover:ring-accent/20 ${className}`}
     >
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -37,7 +37,7 @@ function VerticalCard({ event }) {
       </div>
 
       {/* Body */}
-      <div className="p-5">
+      <div className="p-5 flex-1 flex flex-col">
         <span className="inline-block rounded-md bg-accent/10 px-2.5 py-0.5 text-xs font-semibold text-accent">
           {event.category}
         </span>
@@ -53,7 +53,7 @@ function VerticalCard({ event }) {
           <span className="truncate">{event.dateShort} · {event.location}</span>
         </p>
 
-        <div className="mt-4 border-t border-ehaco-border/50 pt-4">
+        <div className="mt-auto pt-4 border-t border-ehaco-border/50">
           <span className={`text-xs font-medium ${event.remaining <= 10 ? 'text-red-500' : 'text-muted'}`}>
             残り{event.remaining}席
           </span>

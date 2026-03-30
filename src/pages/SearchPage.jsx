@@ -266,8 +266,8 @@ export default function SearchPage() {
                 className="flex gap-5 overflow-x-auto scrollbar-hide scroll-smooth pb-2 -mx-4 px-4 md:mx-0 md:px-0"
               >
                 {recommendedEvents.map((event) => (
-                  <div key={event.id} className="w-[280px] md:w-[300px] shrink-0">
-                    <EventCard event={event} variant="vertical" />
+                  <div key={event.id} className="w-[280px] md:w-[300px] shrink-0 self-stretch">
+                    <EventCard event={event} variant="vertical" className="h-full" />
                   </div>
                 ))}
               </div>
