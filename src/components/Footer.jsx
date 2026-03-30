@@ -3,36 +3,16 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="bg-primary text-white">
-      {/* Newsletter CTA — subtle */}
-      <div className="border-b border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-lg font-bold text-white">最新イベント情報をお届け</h3>
-            <p className="text-sm text-white/50 mt-1">おすすめイベント情報をメールで受け取れます</p>
-          </div>
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            <input
-              type="email"
-              placeholder="メールアドレス"
-              className="flex-1 md:w-64 rounded-xl bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder-white/30 outline-none focus:border-accent focus:ring-1 focus:ring-accent transition"
-            />
-            <button className="shrink-0 rounded-xl bg-accent hover:bg-accent-light text-white font-semibold px-5 py-2.5 text-sm transition">
-              登録
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 text-left">
           {/* Column 1: Logo & description & SNS */}
           <div>
-            <Link to="/" className="text-2xl font-extrabold tracking-tight text-white">
-              ehaco<span className="text-accent-light">!</span>
+            <Link to="/">
+              <img src="/ehaco_design/ehaco-logo.png" alt="ehaco!" className="h-8 object-contain brightness-0 invert" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/40">
-              ビジネスに役立つウェビナー・セミナー・イベント情報を
-              まとめて検索できるプラットフォーム
+              デジタル・テクノロジー分野の
+              ウェビナー・イベント検索サイト
             </p>
             <div className="mt-5 flex items-center gap-2">
               {[
@@ -53,34 +33,67 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Service links */}
+          {/* Column 2: ehaco!について */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-white/70 uppercase tracking-wider">サービス</h3>
+            <h3 className="mb-4 text-sm font-semibold text-white/70 uppercase tracking-wider">ehaco!について</h3>
             <ul className="space-y-3">
               <li>
                 <a href="https://ehaco.net/service/participants" className="text-sm text-white/40 transition hover:text-white">
-                  ehaco!とは
+                  ehaco!とは（利用者向け）
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sm text-white/40 transition hover:text-white">
-                  掲載希望の方
+                <a href="https://ehaco.net/service/organizer" className="text-sm text-white/40 transition hover:text-white">
+                  ehaco!とは（主催者向け）
+                </a>
+              </li>
+              <li>
+                <a href="https://ehaco.net/about/company" className="text-sm text-white/40 transition hover:text-white">
+                  運営会社
+                </a>
+              </li>
+              <li>
+                <a href="https://ehaco.net/register" className="text-sm text-white/40 transition hover:text-white">
+                  会員登録（参加者）
+                </a>
+              </li>
+              <li>
+                <a href="https://org.ehaco.net/register" className="text-sm text-white/40 transition hover:text-white">
+                  掲載希望（主催者）
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Support links */}
+          {/* Column 3: サポート */}
           <div>
             <h3 className="mb-4 text-sm font-semibold text-white/70 uppercase tracking-wider">サポート</h3>
             <ul className="space-y-3">
-              {['利用規約', 'プライバシーポリシー', 'お問い合わせ'].map((label) => (
-                <li key={label}>
-                  <a href="#" className="text-sm text-white/40 transition hover:text-white">
-                    {label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a href="https://ehaco.net/about/terms/participant" className="text-sm text-white/40 transition hover:text-white">
+                  参加者向け利用規約
+                </a>
+              </li>
+              <li>
+                <a href="https://ehaco.net/about/terms/organizer" className="text-sm text-white/40 transition hover:text-white">
+                  主催者向け利用規約
+                </a>
+              </li>
+              <li>
+                <a href="https://ehaco.net/about/privacy" className="text-sm text-white/40 transition hover:text-white">
+                  個人情報の取り扱い
+                </a>
+              </li>
+              <li>
+                <a href="https://40j2oa.share-na2.hsforms.com/2Ot6344zATAmokI3CPqJZ6w" className="text-sm text-white/40 transition hover:text-white">
+                  お問合せ（利用者）
+                </a>
+              </li>
+              <li>
+                <a href="https://40j2oa.share-na2.hsforms.com/2-yS1GfZ_SXCk-YxFEd4Q0w" className="text-sm text-white/40 transition hover:text-white">
+                  お問合せ（主催者）
+                </a>
+              </li>
             </ul>
           </div>
         </div>
