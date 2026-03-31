@@ -13,7 +13,7 @@
   --color-gold-light: #fbbf24;
   --color-section-tint: #f1f5f9;
   --color-section-warm: #faf5ff;
-  --color-muted: #64748b;
+  --color-muted: #475569;
 }
 
 @layer base {
@@ -22,6 +22,7 @@
     color: var(--color-ehaco-text);
     background-color: var(--color-ehaco-bg);
     margin: 0;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -47,6 +48,43 @@
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  .btn-gradient {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    transition: all 0.2s;
+  }
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+  }
+  .btn-gradient:active {
+    transform: scale(0.97);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-hover:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-color: rgba(99, 102, 241, 0.2);
   }
 }
 

@@ -85,8 +85,8 @@ export default function NotificationSettingsPage() {
       <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">お知らせ設定</h1>
-            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+            <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">お知らせ設定</h1>
+            <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
             <p className="text-sm text-gray-500 mt-3">
               受け取る通知の種類と配信方法を設定できます
             </p>

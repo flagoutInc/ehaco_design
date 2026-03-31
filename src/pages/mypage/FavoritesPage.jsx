@@ -24,14 +24,14 @@ export default function FavoritesPage() {
   const favoriteEvents = events.filter((e) => favorites.has(e.id));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8 fade-in">
       <MypageSidebar activePage="favorites" />
       <div className="mt-6">
           {/* Header */}
           <div className="flex items-center gap-3 mb-8">
             <div>
-              <h1 className="text-xl md:text-2xl font-black text-ehaco-text">お気に入り</h1>
-              <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+              <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">お気に入り</h1>
+              <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
             </div>
             <span className="text-sm text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
               {favoriteEvents.length}件
@@ -74,8 +74,8 @@ export default function FavoritesPage() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-ehaco-border p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 sm:p-12 text-center">
+              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>

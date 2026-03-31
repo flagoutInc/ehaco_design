@@ -105,15 +105,15 @@ export default function NotificationsPage() {
       : notifData;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8 fade-in">
       <MypageSidebar activePage="notifications" />
       <div className="mt-6">
           {/* Header */}
           <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div className="flex items-center gap-3">
               <div>
-                <h1 className="text-xl md:text-2xl font-black text-ehaco-text">お知らせ</h1>
-                <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+                <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">お知らせ</h1>
+                <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
               </div>
               {unreadCount > 0 && (
                 <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
@@ -129,7 +129,7 @@ export default function NotificationsPage() {
                 すべて既読にする
               </button>
               <Link
-                to="/mypage/notification-settings"
+                to="/mypage/settings"
                 className="text-xs md:text-sm text-gray-500 hover:text-ehaco-text transition flex items-center gap-1"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -147,7 +147,7 @@ export default function NotificationsPage() {
               <button
                 key={tab}
                 onClick={() => setActiveFilter(tab)}
-                className={`pb-3 text-sm font-medium transition relative ${
+                className={`pb-3 text-base font-medium transition relative ${
                   activeFilter === tab
                     ? 'text-accent'
                     : 'text-gray-500 hover:text-ehaco-text'
@@ -172,9 +172,9 @@ export default function NotificationsPage() {
                       <button
                         key={notif.id}
                         onClick={() => markAsRead(notif.id)}
-                        className={`w-full text-left flex items-start gap-4 p-4 mb-3 rounded-2xl ring-1 transition hover:shadow-md ${
+                        className={`w-full text-left flex items-start gap-4 p-5 mb-4 rounded-2xl ring-1 transition hover:shadow-md ${
                           !isRead
-                            ? 'ring-[#6366f1]/20 bg-[#6366f1]/5'
+                            ? 'ring-accent/20 bg-accent/5'
                             : 'ring-ehaco-border/50 bg-white'
                         }`}
                       >
@@ -188,7 +188,7 @@ export default function NotificationsPage() {
                         {/* Content */}
                         <div className="flex-1 min-w-0">
                           <p
-                            className={`text-sm ${
+                            className={`text-base ${
                               !isRead
                                 ? 'font-bold text-ehaco-text'
                                 : 'font-medium text-ehaco-text'
@@ -196,31 +196,31 @@ export default function NotificationsPage() {
                           >
                             {notif.title}
                           </p>
-                          <p className="text-sm text-[#64748b] mt-0.5 line-clamp-2">
+                          <p className="text-sm text-muted mt-0.5 line-clamp-2 leading-relaxed">
                             {notif.message}
                           </p>
-                          <p className="text-xs text-[#64748b] mt-1">
+                          <p className="text-xs text-muted mt-1">
                             {notif.dateRelative}
                           </p>
                         </div>
 
                         {/* Unread dot */}
                         {!isRead && (
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#6366f1] shrink-0 mt-2" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-accent shrink-0 mt-2" />
                         )}
                       </button>
                     );
                   })}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6 sm:p-12 text-center">
+              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
               </div>
               <p className="font-bold text-ehaco-text mb-1">未読のお知らせはありません</p>
-              <p className="text-sm text-[#64748b]">新しいお知らせが届くとここに表示されます</p>
+              <p className="text-sm text-muted">新しいお知らせが届くとここに表示されます</p>
             </div>
           )}
       </div>

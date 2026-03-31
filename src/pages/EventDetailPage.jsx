@@ -15,11 +15,12 @@ export default function EventDetailPage() {
   const capacityPercent = Math.round((capacityUsed / event.capacity) * 100);
 
   return (
-    <div className="min-h-screen bg-ehaco-bg pb-20 lg:pb-0">
+    <div className="min-h-screen bg-ehaco-bg pb-20 lg:pb-0 fade-in">
       {/* Full-bleed banner image */}
       <img
         src="https://placehold.co/1400x500/0f172a/white?text=DX+Seminar"
         alt={event.title}
+        loading="lazy"
         className="w-full h-[240px] md:h-[360px] object-cover"
       />
 
@@ -29,7 +30,7 @@ export default function EventDetailPage() {
           {/* Back link */}
           <button
             onClick={() => window.history.back()}
-            className="inline-flex items-center gap-1.5 text-sm text-[#64748b] hover:text-ehaco-text transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-ehaco-text transition-colors mb-4"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -50,34 +51,35 @@ export default function EventDetailPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-xl md:text-3xl font-extrabold text-ehaco-text mb-4 leading-tight">{event.title}</h1>
+          <h1 className="text-2xl md:text-4xl font-black tracking-tight text-ehaco-text mb-4 leading-tight">{event.title}</h1>
 
           {/* Organizer */}
           <div className="flex items-center gap-3 mb-5">
             <img
               src={event.organizerLogo}
               alt={event.organizer}
+              loading="lazy"
               className="w-8 h-8 rounded-full"
             />
-            <span className="text-sm text-[#64748b]">主催: {event.organizer}</span>
+            <span className="text-sm text-muted">主催: {event.organizer}</span>
           </div>
 
           {/* Date / Location / Capacity */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-6">
-            <span className="flex items-center gap-2 text-sm text-[#64748b]">
+            <span className="flex items-center gap-2 text-sm text-muted">
               <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               {event.date}
             </span>
-            <span className="flex items-center gap-2 text-sm text-[#64748b]">
+            <span className="flex items-center gap-2 text-sm text-muted">
               <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               {event.location}
             </span>
-            <span className="flex items-center gap-2 text-sm text-[#64748b]">
+            <span className="flex items-center gap-2 text-sm text-muted">
               <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -94,10 +96,10 @@ export default function EventDetailPage() {
           <div className="flex-1 max-w-3xl min-w-0">
             {/* Event Overview */}
             <section className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-bold text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
                 イベント概要
               </h2>
-              <div className="text-sm leading-relaxed text-gray-600 space-y-4">
+              <div className="text-base leading-relaxed text-gray-600 space-y-4">
                 <p>
                   デジタルトランスフォーメーション（DX）が企業の競争力を左右する時代において、データの活用は避けて通れない経営課題となっています。
                   本セミナーでは、DX推進の最前線で活躍する専門家が、データ活用戦略の立案から実行までの具体的なプロセスを解説します。
@@ -116,7 +118,7 @@ export default function EventDetailPage() {
 
             {/* Recommended For */}
             <section className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-bold text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
                 こんな方におすすめ
               </h2>
               <div className="bg-accent/5 rounded-2xl p-4 md:p-6">
@@ -145,10 +147,10 @@ export default function EventDetailPage() {
 
             {/* Event Details Table */}
             <section className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-bold text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
                 開催概要
               </h2>
-              <dl className="grid grid-cols-[auto_1fr] gap-x-4 md:gap-x-8 gap-y-3 md:gap-y-4 text-sm">
+              <dl className="grid grid-cols-[auto_1fr] gap-x-4 md:gap-x-8 gap-y-4 md:gap-y-6 text-sm">
                 <dt className="font-bold text-ehaco-text">日時</dt>
                 <dd className="text-gray-600">{event.date}</dd>
 
@@ -171,15 +173,16 @@ export default function EventDetailPage() {
 
             {/* Speakers */}
             <section className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-bold text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
                 講師紹介
               </h2>
               <div className="space-y-4 md:space-y-6">
                 {speakers.map((speaker) => (
-                  <div key={speaker.name} className="flex flex-col sm:flex-row items-start gap-4 md:gap-5 p-4 md:p-5 bg-white rounded-2xl ring-1 ring-ehaco-border/50">
+                  <div key={speaker.name} className="flex flex-col sm:flex-row items-start gap-5 md:gap-6 p-4 md:p-5 bg-white rounded-2xl ring-1 ring-ehaco-border/50">
                     <img
                       src={speaker.photo}
                       alt={speaker.name}
+                      loading="lazy"
                       className="w-16 h-16 md:w-20 md:h-20 rounded-full flex-shrink-0 object-cover"
                     />
                     <div>
@@ -194,7 +197,7 @@ export default function EventDetailPage() {
 
             {/* Privacy Notice */}
             <section className="mb-6 md:mb-8">
-              <h2 className="text-lg md:text-xl font-bold text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
                 個人情報の取り扱い
               </h2>
               <p className="text-xs text-gray-500 leading-relaxed">
@@ -210,7 +213,7 @@ export default function EventDetailPage() {
             <div className="lg:sticky lg:top-24 space-y-6">
               {/* Ticket Card */}
               <div className="bg-white rounded-2xl shadow-lg ring-1 ring-ehaco-border/50 overflow-hidden">
-                <div className="p-5 md:p-6">
+                <div className="p-6 md:p-8">
                   {/* Favorite Button */}
                   <div className="flex justify-end mb-3">
                     <button
@@ -271,7 +274,7 @@ export default function EventDetailPage() {
                   </div>
 
                   {/* CTA Button */}
-                  <button className="hidden lg:block w-full bg-accent hover:bg-accent-light text-white text-lg font-medium py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer">
+                  <button className="hidden lg:block w-full btn-gradient text-lg font-medium py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer active:scale-[0.97]">
                     このイベントに申し込む
                   </button>
                 </div>
@@ -314,6 +317,7 @@ export default function EventDetailPage() {
                   <img
                     src={event.organizerLogo}
                     alt={event.organizer}
+                    loading="lazy"
                     className="w-12 h-12 rounded-full"
                   />
                   <div>
@@ -338,12 +342,13 @@ export default function EventDetailPage() {
                   {relatedEvents.map((relEvent) => (
                     <Link
                       key={relEvent.id}
-                      to={`/events/${relEvent.id}`}
+                      to={`/event/${relEvent.id}`}
                       className="flex gap-3 group"
                     >
                       <img
                         src={relEvent.image}
                         alt={relEvent.title}
+                        loading="lazy"
                         className="w-20 h-14 rounded-lg object-cover flex-shrink-0"
                       />
                       <div className="min-w-0">
@@ -365,10 +370,20 @@ export default function EventDetailPage() {
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-ehaco-border p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-lg z-40 lg:hidden">
         <div className="flex items-center gap-3">
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-gray-500 truncate">{event.title}</p>
-            <p className="text-lg font-bold text-accent">無料</p>
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-lg font-bold text-accent">無料</span>
+              <span className={`text-xs font-medium ${event.remaining <= 10 ? 'text-red-500' : 'text-muted'}`}>
+                残り{event.remaining}席
+              </span>
+            </div>
+            <p className="text-[11px] text-muted flex items-center gap-1">
+              <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              締切 {event.deadline}
+            </p>
           </div>
-          <button className="bg-accent hover:bg-accent-light text-white font-bold px-6 py-3 rounded-xl transition-all shrink-0">
+          <button className="btn-gradient font-bold px-6 py-3 rounded-xl shrink-0 active:scale-[0.97]">
             申し込む
           </button>
         </div>

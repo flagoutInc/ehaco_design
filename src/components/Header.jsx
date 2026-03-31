@@ -49,58 +49,74 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-ehaco-border/50 shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 md:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-1.5 md:px-6 md:py-3.5">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src="/ehaco_design/ehaco-logo.png" alt="ehaco!" className="h-8 md:h-9 object-contain" />
+          <img src="/ehaco_design/ehaco-logo.png" alt="ehaco!" className="h-7 md:h-9 object-contain" />
         </Link>
 
         {/* Center nav (PC) */}
         <nav className="hidden items-center gap-8 md:flex">
           <Link
             to="/"
-            className="relative text-sm font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+            className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >
             イベントを探す
           </Link>
           <a
             href="https://ehaco.net/service/participants"
-            className="relative text-sm font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+            className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >
             ehaco!とは
           </a>
           <a
             href="#"
-            className="relative text-sm font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+            className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >
             掲載希望の方
           </a>
         </nav>
 
         {/* Right side */}
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-1 md:gap-3">
           {/* Notification bell */}
           <div className="relative" ref={notifRef}>
+            {/* Mobile: direct link to notifications page */}
+            <Link
+              to="/mypage/notifications"
+              aria-label="お知らせ"
+              className="relative flex items-center justify-center w-8 h-8 rounded-lg text-muted hover:bg-gray-100 hover:text-ehaco-text transition-colors md:hidden"
+            >
+              <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+              </svg>
+              {unreadCount > 0 && (
+                <span className="absolute right-0 top-0 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white ring-1.5 ring-white">
+                  {unreadCount}
+                </span>
+              )}
+            </Link>
+            {/* PC: dropdown */}
             <button
               onClick={() => {
                 setNotifOpen((prev) => !prev);
                 setUserMenuOpen(false);
               }}
-              className="relative rounded-xl p-2 text-muted hover:bg-gray-100 hover:text-ehaco-text transition-colors"
+              className="relative rounded-xl p-2 text-muted hover:bg-gray-100 hover:text-ehaco-text transition-colors hidden md:block"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
               </svg>
               {unreadCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white ring-2 ring-white">
                   {unreadCount}
                 </span>
               )}
             </button>
 
-            {/* Notification dropdown */}
+            {/* Notification dropdown (PC only) */}
             {notifOpen && (
-              <div className="absolute right-0 top-full mt-3 w-[calc(100vw-2rem)] max-w-96 overflow-hidden rounded-2xl border border-ehaco-border bg-white shadow-2xl md:w-96">
+              <div className="absolute right-0 top-full mt-3 w-96 overflow-hidden rounded-2xl border border-ehaco-border bg-white shadow-2xl hidden md:block">
                 <div className="flex items-center justify-between border-b border-ehaco-border px-5 py-3.5">
                   <h3 className="font-semibold text-ehaco-text">お知らせ</h3>
                   <button onClick={markAllRead} className="text-xs font-medium text-accent transition hover:text-accent-light">
@@ -149,7 +165,7 @@ export default function Header() {
               }}
               className="flex items-center gap-2.5 rounded-xl py-1.5 pl-1.5 pr-3 text-ehaco-text hover:bg-gray-100 transition-colors"
             >
-              <img src={user.avatar} alt={user.name} className="h-8 w-8 rounded-lg object-cover" />
+              <img src={user.avatar} alt={user.name} loading="lazy" className="h-8 w-8 rounded-lg object-cover" />
               <span className="text-sm font-medium">{user.name}</span>
             </button>
 
@@ -164,7 +180,7 @@ export default function Header() {
                   <Link
                     key={to}
                     to={to}
-                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-ehaco-text transition hover:bg-gray-50"
+                    className="flex items-center gap-3 px-4 py-2.5 text-base text-ehaco-text transition hover:bg-gray-50"
                     onClick={() => setUserMenuOpen(false)}
                   >
                     <svg className="h-4 w-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -174,12 +190,23 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="my-1 border-t border-ehaco-border" />
-                <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 transition hover:bg-gray-50">
+                <Link
+                  to="/org/events"
+                  className="flex items-center gap-3 px-4 py-2.5 text-base text-accent transition hover:bg-gray-50"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5M3.75 3v18m16.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                  </svg>
+                  主催者管理
+                </Link>
+                <div className="my-1 border-t border-ehaco-border" />
+                <Link to="/login" className="flex items-center gap-3 px-4 py-2.5 text-base text-red-500 transition hover:bg-gray-50">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
                   </svg>
                   ログアウト
-                </a>
+                </Link>
               </div>
             )}
           </div>
@@ -187,14 +214,15 @@ export default function Header() {
           {/* Hamburger button (mobile) */}
           <button
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="rounded-xl p-2 text-ehaco-text hover:bg-gray-100 transition-colors md:hidden"
+            aria-label="メニュー"
+            className="flex items-center justify-center w-8 h-8 rounded-lg text-ehaco-text hover:bg-gray-100 transition-colors md:hidden"
           >
             {mobileMenuOpen ? (
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
               </svg>
             )}
@@ -213,21 +241,21 @@ export default function Header() {
         <nav className="space-y-1 px-4 py-3">
           <Link
             to="/"
-            className="block rounded-xl px-3 py-2.5 text-sm font-medium text-ehaco-text hover:bg-gray-50 transition"
+            className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
             onClick={() => setMobileMenuOpen(false)}
           >
             イベントを探す
           </Link>
           <a
             href="https://ehaco.net/service/participants"
-            className="block rounded-xl px-3 py-2.5 text-sm font-medium text-ehaco-text hover:bg-gray-50 transition"
+            className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
             onClick={() => setMobileMenuOpen(false)}
           >
             ehaco!とは
           </a>
           <a
             href="#"
-            className="block rounded-xl px-3 py-2.5 text-sm font-medium text-ehaco-text hover:bg-gray-50 transition"
+            className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
             onClick={() => setMobileMenuOpen(false)}
           >
             掲載希望の方
@@ -238,7 +266,7 @@ export default function Header() {
 
         <div className="px-4 py-3">
           <div className="mb-3 flex items-center gap-3">
-            <img src={user.avatar} alt={user.name} className="h-10 w-10 rounded-lg object-cover" />
+            <img src={user.avatar} alt={user.name} loading="lazy" className="h-10 w-10 rounded-lg object-cover" />
             <div>
               <p className="text-sm font-medium text-ehaco-text">{user.name}</p>
               <p className="text-xs text-muted">{user.email}</p>
@@ -264,13 +292,25 @@ export default function Header() {
         <div className="mx-4 border-t border-ehaco-border/50" />
 
         <div className="px-4 py-3">
-          <a
-            href="#"
+          <Link
+            to="/org/events"
+            className="block rounded-xl px-3 py-2.5 text-sm text-accent font-medium hover:bg-accent/5 transition"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            主催者管理
+          </Link>
+        </div>
+
+        <div className="mx-4 border-t border-ehaco-border/50" />
+
+        <div className="px-4 py-3">
+          <Link
+            to="/login"
             className="block rounded-xl px-3 py-2.5 text-sm text-red-500 hover:bg-gray-50 transition"
             onClick={() => setMobileMenuOpen(false)}
           >
             ログアウト
-          </a>
+          </Link>
         </div>
       </div>
     </header>

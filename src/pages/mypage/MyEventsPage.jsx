@@ -20,13 +20,13 @@ export default function MyEventsPage() {
       : myEvents.filter((e) => e.status === activeTab);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8 fade-in">
       <MypageSidebar activePage="events" />
       <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">申込済みイベント</h1>
-            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+            <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">申込済みイベント</h1>
+            <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
           </div>
 
           {/* Tabs */}
@@ -35,7 +35,7 @@ export default function MyEventsPage() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`pb-3 text-sm font-medium transition relative ${
+                className={`pb-3 text-base font-medium transition relative ${
                   activeTab === tab
                     ? 'text-accent'
                     : 'text-gray-500 hover:text-ehaco-text'
@@ -55,12 +55,12 @@ export default function MyEventsPage() {
               {filteredEvents.map((event) => (
                 <div
                   key={event.id}
-                  className="bg-white rounded-xl border border-ehaco-border overflow-hidden flex hover:shadow-md transition-shadow"
+                  className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm overflow-hidden flex hover:shadow-md transition-shadow"
                 >
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="w-[120px] h-[90px] md:w-[180px] md:h-[130px] object-cover shrink-0"
+                    className="w-[80px] h-[70px] sm:w-[120px] sm:h-[90px] md:w-[180px] md:h-[130px] object-cover shrink-0"
                   />
                   <div className="flex-1 p-4 flex flex-col justify-between">
                     <div>
@@ -68,8 +68,8 @@ export default function MyEventsPage() {
                         <span
                           className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                             event.status === '開催予定'
-                              ? 'bg-green-100 text-green-700'
-                              : 'bg-gray-100 text-gray-500'
+                              ? 'bg-green-100 text-green-700 border border-green-200'
+                              : 'bg-gray-100 text-gray-500 border border-gray-200'
                           }`}
                         >
                           {event.status}
@@ -78,7 +78,7 @@ export default function MyEventsPage() {
                       </div>
                       <Link
                         to={`/event/${event.id}`}
-                        className="font-bold text-ehaco-text hover:text-accent transition line-clamp-1"
+                        className="text-base md:text-lg font-bold text-ehaco-text hover:text-accent transition line-clamp-1"
                       >
                         {event.title}
                       </Link>
@@ -113,8 +113,8 @@ export default function MyEventsPage() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-ehaco-border p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 sm:p-12 text-center">
+              <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>

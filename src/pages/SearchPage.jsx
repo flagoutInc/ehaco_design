@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { events, categories, areas } from '../data/dummy';
 import EventCard from '../components/EventCard';
+
+const PAGE_SIZE = 8;
 
 const formatOptions = ['オンライン', 'オフライン', 'ハイブリッド'];
 const sortOptions = ['新着順', '人気順', '締め切り順'];
@@ -107,9 +109,28 @@ export default function SearchPage() {
     ...(selectedFormat !== 'すべて' ? [{ key: 'format', value: selectedFormat }] : []),
   ];
 
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const loadMoreRef = useRef(null);
   const isIdle = !searchQuery && !hasActiveFilters;
   const recommendedEvents = events.slice(0, 8);
   const scrollRef = useRef(null);
+  const visibleEvents = events.slice(0, visibleCount);
+  const hasMore = visibleCount < events.length;
+
+  const loadMore = useCallback(() => {
+    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, events.length));
+  }, []);
+
+  useEffect(() => {
+    const el = loadMoreRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) loadMore(); },
+      { rootMargin: '200px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loadMore]);
 
   const scrollCarousel = (direction) => {
     if (!scrollRef.current) return;
@@ -131,18 +152,18 @@ export default function SearchPage() {
   const activeModalDef = filterDefs.find((f) => f.key === activeModal);
 
   return (
-    <div className="min-h-screen bg-ehaco-bg">
+    <div className="min-h-screen bg-ehaco-bg fade-in">
       {/* ─── Search Bar ─── */}
       <div className="bg-white border-b border-ehaco-border">
         <div className="max-w-3xl mx-auto px-4 py-6 md:py-8">
           <div className="text-center mb-6">
-            <h1 className="text-lg md:text-2xl font-extrabold text-ehaco-text tracking-tight mb-3">
+            <h1 className="text-xl md:text-3xl font-black text-gradient tracking-tight mb-3">
               そのビジネス課題、ここで解決につながるヒントが見つかる。
             </h1>
-            <p className="text-xs md:text-sm text-muted mb-4">デジタル・テクノロジー分野のウェビナー・イベントを探すなら</p>
+            <p className="text-sm md:text-base leading-relaxed text-muted mb-4">デジタル・テクノロジー分野のウェビナー・イベントを探すなら</p>
             <img src="/ehaco_design/ehaco-logo.png" alt="ehaco!" className="h-10 md:h-14 mx-auto object-contain" />
           </div>
-          <div className="flex items-center bg-ehaco-bg rounded-xl ring-1 ring-ehaco-border overflow-hidden">
+          <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-xl ring-1 ring-ehaco-border shadow-sm overflow-hidden">
             <div className="flex items-center flex-1 px-4 md:px-5 gap-3">
               <svg className="h-5 w-5 text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -155,7 +176,7 @@ export default function SearchPage() {
                 className="flex-1 py-3 text-sm md:text-base text-ehaco-text outline-none bg-transparent placeholder:text-muted/50"
               />
             </div>
-            <button className="bg-accent hover:bg-accent-light text-white text-sm font-semibold px-6 py-3 transition-colors">
+            <button className="btn-gradient text-sm font-semibold px-6 py-3 active:scale-[0.97]">
               検索
             </button>
           </div>
@@ -166,7 +187,7 @@ export default function SearchPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
 
         {/* ─── Filter Chips Row ─── */}
-        <div className="flex flex-wrap items-center gap-2 mb-4">
+        <div className="flex flex-wrap items-center gap-3 mb-6">
           {filterDefs.map((f) => {
             const count = getFilterCount(f.key);
             return (
@@ -245,9 +266,9 @@ export default function SearchPage() {
         {/* ─── Idle State: おすすめ ─── */}
         {isIdle && (
           <div className="mb-10">
-            <div className="mb-6">
+            <div className="mb-8">
               <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">Recommended</p>
-              <h2 className="text-xl md:text-2xl font-extrabold text-ehaco-text tracking-tight">おすすめのイベント</h2>
+              <h2 className="text-2xl md:text-3xl font-black text-ehaco-text tracking-tight">おすすめのイベント</h2>
             </div>
             <div className="relative">
               {/* Left arrow */}
@@ -266,7 +287,7 @@ export default function SearchPage() {
                 className="flex gap-5 overflow-x-auto scrollbar-hide scroll-smooth pb-2 -mx-4 px-4 md:mx-0 md:px-0"
               >
                 {recommendedEvents.map((event) => (
-                  <div key={event.id} className="w-[280px] md:w-[300px] shrink-0 self-stretch">
+                  <div key={event.id} className="w-[240px] sm:w-[280px] md:w-[300px] shrink-0 self-stretch">
                     <EventCard event={event} variant="vertical" className="h-full" />
                   </div>
                 ))}
@@ -287,16 +308,16 @@ export default function SearchPage() {
 
         {/* ─── イベント一覧（常に表示） ─── */}
         {isIdle && (
-          <div className="border-t border-ehaco-border pt-10 mb-6">
+          <div className="border-t border-ehaco-border pt-10 mb-8">
             <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">All Events</p>
-            <h2 className="text-xl md:text-2xl font-extrabold text-ehaco-text tracking-tight">すべてのイベント</h2>
+            <h2 className="text-2xl md:text-3xl font-black text-ehaco-text tracking-tight">すべてのイベント</h2>
           </div>
         )}
 
         {/* Results Top Bar: Count + Sort */}
         <div className="flex items-center justify-between mb-5 md:mb-6">
               <p className="text-sm text-muted">
-                <span className="text-2xl font-extrabold text-ehaco-text">{events.length}</span>
+                <span className="text-2xl font-black text-ehaco-text">{events.length}</span>
                 <span className="ml-1">件のイベント</span>
               </p>
               {/* PC: segment control */}
@@ -328,40 +349,30 @@ export default function SearchPage() {
             </div>
 
             {/* Event List: Horizontal cards */}
-            <div className="space-y-6 mb-8">
-              {events.slice(0, 15).map((event) => (
-                <EventCard key={event.id} event={event} variant="horizontal" />
-              ))}
-            </div>
+            {visibleEvents.length > 0 ? (
+              <div className="space-y-6 mb-8">
+                {visibleEvents.map((event) => (
+                  <EventCard key={event.id} event={event} variant="horizontal" />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-12 text-center mb-8">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-accent/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-bold text-ehaco-text mb-1">該当するイベントがありません</p>
+                <p className="text-sm text-muted">条件を変更して再検索してください</p>
+              </div>
+            )}
 
-            {/* Pagination */}
-            <nav className="flex items-center justify-center gap-1 pb-4">
-              <button className="w-10 h-10 flex items-center justify-center rounded-xl text-muted hover:bg-white hover:text-ehaco-text transition-colors border border-transparent hover:border-ehaco-border">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold bg-accent text-white">
-                1
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-xl text-sm text-ehaco-text hover:bg-white transition-colors border border-transparent hover:border-ehaco-border">
-                2
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-xl text-sm text-ehaco-text hover:bg-white transition-colors border border-transparent hover:border-ehaco-border">
-                3
-              </button>
-              <span className="w-10 h-10 flex items-center justify-center text-sm text-muted">
-                ...
-              </span>
-              <button className="w-10 h-10 flex items-center justify-center rounded-xl text-sm text-ehaco-text hover:bg-white transition-colors border border-transparent hover:border-ehaco-border">
-                10
-              </button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-xl text-muted hover:bg-white hover:text-ehaco-text transition-colors border border-transparent hover:border-ehaco-border">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </nav>
+            {/* Infinite scroll sentinel */}
+            {hasMore && (
+              <div ref={loadMoreRef} className="flex justify-center py-8">
+                <div className="h-6 w-6 border-2 border-accent/30 border-t-accent rounded-full animate-spin" />
+              </div>
+            )}
       </div>
 
       {/* ─── Filter Modal ─── */}
@@ -373,11 +384,11 @@ export default function SearchPage() {
             onClick={() => setActiveModal(null)}
           />
 
-          {/* Modal panel: full-screen on mobile, centered on desktop */}
-          <div className="relative w-full h-full md:h-auto md:max-h-[80vh] md:max-w-lg md:mx-4 bg-white md:rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+          {/* Modal panel: half-sheet on mobile, centered on desktop */}
+          <div className="relative w-full max-h-[70vh] rounded-t-2xl md:h-auto md:max-h-[80vh] md:max-w-lg md:mx-4 bg-white md:rounded-2xl overflow-hidden flex flex-col shadow-2xl">
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-ehaco-border shrink-0">
-              <h2 className="text-lg font-extrabold text-ehaco-text">{activeModalDef.label}</h2>
+              <h2 className="text-lg font-black text-ehaco-text">{activeModalDef.label}</h2>
               <button
                 onClick={() => setActiveModal(null)}
                 className="p-1.5 text-muted hover:text-ehaco-text transition-colors rounded-lg hover:bg-gray-100"
@@ -405,7 +416,7 @@ export default function SearchPage() {
                         name={activeModal}
                         checked={checked}
                         onChange={() => toggleOption(activeModal, option)}
-                        className="w-4.5 h-4.5 rounded border-ehaco-border text-accent focus:ring-accent"
+                        className="w-5 h-5 rounded border-ehaco-border text-accent focus:ring-accent"
                       />
                       <span className={`text-sm ${checked ? 'font-semibold text-accent' : 'text-ehaco-text'}`}>
                         {option}
@@ -435,7 +446,7 @@ export default function SearchPage() {
                 onClick={() => setActiveModal(null)}
                 className="flex-1 py-2.5 bg-accent text-white rounded-xl text-sm font-semibold hover:bg-accent-light transition"
               >
-                適用する
+                適用する（{events.length}件）
               </button>
             </div>
           </div>

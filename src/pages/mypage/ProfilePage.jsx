@@ -37,24 +37,25 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8">
       <MypageSidebar activePage="profile" />
       <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">プロフィール設定</h1>
-            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+            <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">プロフィール設定</h1>
+            <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
           </div>
 
           {/* Avatar */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
+            <h2 className="text-xl font-bold tracking-tight text-ehaco-text mb-4">
               プロフィール画像
             </h2>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 sm:gap-6">
               <img
                 src={user.avatar}
                 alt={user.name}
+                loading="lazy"
                 className="w-20 h-20 rounded-full"
               />
               <div>
@@ -69,8 +70,8 @@ export default function ProfilePage() {
           </div>
 
           {/* Basic info */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
+            <h2 className="text-xl font-bold tracking-tight text-ehaco-text mb-4">
               基本情報
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,11 +123,11 @@ export default function ProfilePage() {
           </div>
 
           {/* Interests */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
+            <h2 className="text-xl font-bold tracking-tight text-ehaco-text mb-4">
               興味のあるカテゴリ
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {categories.map((category) => {
                 const isChecked = selectedCategories.has(category);
                 return (
@@ -145,7 +146,7 @@ export default function ProfilePage() {
                       className="sr-only"
                     />
                     <span
-                      className={`w-4.5 h-4.5 rounded border-2 flex items-center justify-center shrink-0 transition ${
+                      className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition ${
                         isChecked
                           ? 'bg-accent border-accent'
                           : 'border-gray-300'
@@ -175,8 +176,8 @@ export default function ProfilePage() {
           </div>
 
           {/* Bio */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
+            <h2 className="text-xl font-bold tracking-tight text-ehaco-text mb-4">
               自己紹介
             </h2>
             <div className="relative">
@@ -202,7 +203,7 @@ export default function ProfilePage() {
 
           {/* Save button */}
           <div className="flex justify-end">
-            <button className="bg-accent hover:bg-accent-light text-white font-medium px-8 py-2.5 rounded-lg transition">
+            <button className="btn-gradient font-medium px-8 py-2.5 rounded-lg transition">
               プロフィールを保存
             </button>
           </div>

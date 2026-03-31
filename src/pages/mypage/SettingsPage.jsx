@@ -117,57 +117,57 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8">
       <MypageSidebar activePage="settings" />
       <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">設定</h1>
-            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+            <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">設定</h1>
+            <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
           </div>
 
           {/* ===== Section 1: アカウント ===== */}
           <div className="mb-12">
-            <h2 className="text-lg font-bold text-ehaco-text mb-6">アカウント</h2>
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-6">アカウント</h2>
 
             {/* Email */}
-            <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
               <h3 className="text-base font-bold text-ehaco-text mb-4">
                 メールアドレス
               </h3>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <p className="text-sm text-gray-500">現在のメールアドレス</p>
                   <p className="text-sm font-medium text-ehaco-text mt-1">
                     {user.email}
                   </p>
                 </div>
-                <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg">
+                <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg w-full sm:w-auto text-center shrink-0">
                   変更する
                 </button>
               </div>
             </div>
 
             {/* Password */}
-            <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
               <h3 className="text-base font-bold text-ehaco-text mb-4">
                 パスワード
               </h3>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <p className="text-sm text-gray-500">現在のパスワード</p>
                   <p className="text-sm font-medium text-ehaco-text mt-1 tracking-widest">
                     ••••••••••
                   </p>
                 </div>
-                <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg">
+                <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg w-full sm:w-auto text-center shrink-0">
                   変更する
                 </button>
               </div>
             </div>
 
             {/* External accounts */}
-            <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
               <h3 className="text-base font-bold text-ehaco-text mb-4">
                 外部アカウント連携
               </h3>
@@ -180,7 +180,7 @@ export default function SettingsPage() {
                     <div className="flex items-center gap-3">
                       <span className={account.color}>{account.icon}</span>
                       <div>
-                        <p className="text-sm font-medium text-ehaco-text">
+                        <p className="text-base font-medium text-ehaco-text">
                           {account.name}
                         </p>
                         {account.connected && (
@@ -206,8 +206,8 @@ export default function SettingsPage() {
             </div>
 
             {/* Account deletion */}
-            <div className="bg-white rounded-xl border-2 border-red-200 p-6">
-              <h3 className="text-lg font-bold text-red-600 mb-2">
+            <div className="bg-white rounded-xl border-2 border-red-200 p-6 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold text-red-600 mb-2">
                 アカウント削除
               </h3>
               <p className="text-sm text-gray-500 mb-4">
@@ -221,13 +221,13 @@ export default function SettingsPage() {
 
           {/* ===== Section 2: 通知設定 ===== */}
           <div>
-            <h2 className="text-lg font-bold text-ehaco-text mb-6">通知設定</h2>
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-6">通知設定</h2>
             <p className="text-sm text-gray-500 mb-6">
               受け取る通知の種類と配信方法を設定できます
             </p>
 
             {/* Site notifications */}
-            <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
               <h3 className="text-base font-bold text-ehaco-text mb-4">
                 サイト内通知
               </h3>
@@ -238,10 +238,10 @@ export default function SettingsPage() {
                     className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
                   >
                     <div>
-                      <p className="text-sm font-medium text-ehaco-text">
+                      <p className="text-base font-medium text-ehaco-text">
                         {option.label}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-xs md:text-sm text-gray-500 mt-0.5">
                         {option.description}
                       </p>
                     </div>
@@ -255,7 +255,7 @@ export default function SettingsPage() {
             </div>
 
             {/* Email notifications */}
-            <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
               <h3 className="text-base font-bold text-ehaco-text mb-4">
                 メール通知
               </h3>
@@ -266,10 +266,10 @@ export default function SettingsPage() {
                     className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
                   >
                     <div>
-                      <p className="text-sm font-medium text-ehaco-text">
+                      <p className="text-base font-medium text-ehaco-text">
                         {option.label}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-xs md:text-sm text-gray-500 mt-0.5">
                         {option.description}
                       </p>
                     </div>
@@ -283,7 +283,7 @@ export default function SettingsPage() {
             </div>
 
             {/* Email frequency */}
-            <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+            <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 md:p-8 mb-6">
               <h3 className="text-base font-bold text-ehaco-text mb-4">
                 メール通知の頻度
               </h3>
@@ -317,10 +317,10 @@ export default function SettingsPage() {
                       )}
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-ehaco-text">
+                      <p className="text-base font-medium text-ehaco-text">
                         {option.label}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-xs md:text-sm text-gray-500 mt-0.5">
                         {option.description}
                       </p>
                     </div>
@@ -331,7 +331,7 @@ export default function SettingsPage() {
 
             {/* Save button */}
             <div className="flex justify-end">
-              <button className="bg-accent hover:bg-accent-light text-white font-medium px-8 py-2.5 rounded-lg transition">
+              <button className="btn-gradient font-medium px-6 sm:px-8 py-2.5 rounded-lg transition w-full sm:w-auto">
                 設定を保存
               </button>
             </div>

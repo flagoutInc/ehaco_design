@@ -39,17 +39,17 @@ const externalAccounts = [
 
 export default function AccountPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8">
       <MypageSidebar activePage="account" />
       <div className="mt-6">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-xl md:text-2xl font-black text-ehaco-text">アカウント設定</h1>
-            <div className="mt-2 h-1 w-12 bg-accent rounded-full" />
+            <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">アカウント設定</h1>
+            <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
           </div>
 
           {/* Email */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 mb-6">
             <h2 className="text-lg font-bold text-ehaco-text mb-4">
               メールアドレス
             </h2>
@@ -67,7 +67,7 @@ export default function AccountPage() {
           </div>
 
           {/* Password */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 mb-6">
             <h2 className="text-lg font-bold text-ehaco-text mb-4">
               パスワード
             </h2>
@@ -85,7 +85,7 @@ export default function AccountPage() {
           </div>
 
           {/* External accounts */}
-          <div className="bg-white rounded-xl border border-ehaco-border p-6 mb-6">
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 mb-6">
             <h2 className="text-lg font-bold text-ehaco-text mb-4">
               外部アカウント連携
             </h2>

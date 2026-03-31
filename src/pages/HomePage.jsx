@@ -23,7 +23,7 @@ function SectionHeader({ enLabel, title, className = '' }) {
   return (
     <div className={className}>
       <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">{enLabel}</p>
-      <h2 className="text-2xl md:text-3xl font-extrabold text-ehaco-text tracking-tight">{title}</h2>
+      <h2 className="text-2xl md:text-3xl font-black text-ehaco-text tracking-tight">{title}</h2>
     </div>
   )
 }
@@ -109,16 +109,16 @@ function HomePage() {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-light/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 flex flex-col items-center justify-center py-24 md:py-36 text-center">
+        <div className="relative max-w-7xl mx-auto px-4 flex flex-col items-center justify-center py-16 sm:py-24 md:py-36 text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
             <span className="text-xs font-medium text-white/80">ビジネスイベントプラットフォーム</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.15] text-white mb-4 md:mb-5 tracking-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-black leading-[1.15] text-white mb-4 md:mb-5 tracking-tight">
             あなたにぴったりの<br className="hidden sm:inline" />イベントが見つかる
           </h1>
-          <p className="text-base md:text-lg text-white/60 mb-10 md:mb-12 max-w-lg">
+          <p className="text-lg md:text-xl leading-relaxed text-white/60 mb-10 md:mb-12 max-w-lg">
             ウェビナー・セミナー情報を一括検索
           </p>
 
@@ -160,7 +160,7 @@ function HomePage() {
                   >
                     <span>{label}</span>
                     {selected.length > 0 && (
-                      <span className="bg-accent text-white text-[10px] font-bold w-4.5 h-4.5 rounded-full flex items-center justify-center leading-none">
+                      <span className="bg-accent text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center leading-none">
                         {selected.length}
                       </span>
                     )}
@@ -209,12 +209,12 @@ function HomePage() {
 
       {/* おすすめのイベント Carousel */}
       <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <div className="flex items-end justify-between mb-10">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-16 md:py-24">
+          <div className="flex items-end justify-between mb-6 sm:mb-10">
             <SectionHeader enLabel="Recommended" title="おすすめのイベント" />
             <Link
               to="/search"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-accent rounded-xl px-4 py-2 transition-colors hover:bg-accent/5"
+              className="inline-flex items-center gap-1.5 text-sm md:text-base font-medium text-muted hover:text-accent rounded-xl px-4 py-2 transition-colors hover:bg-accent/5"
             >
               すべて見る
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -283,12 +283,12 @@ function HomePage() {
 
       {/* 新着イベント Section */}
       <section className="bg-section-tint">
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <div className="flex items-end justify-between mb-10">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-16 md:py-24">
+          <div className="flex items-end justify-between mb-6 sm:mb-10">
             <SectionHeader enLabel="New Arrivals" title="新着イベント" />
             <Link
               to="/search?sort=new"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-accent rounded-xl px-4 py-2 transition-colors hover:bg-accent/5"
+              className="inline-flex items-center gap-1.5 text-sm md:text-base font-medium text-muted hover:text-accent rounded-xl px-4 py-2 transition-colors hover:bg-accent/5"
             >
               すべて見る
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -310,12 +310,12 @@ function HomePage() {
 
       {/* 締め切り間近 Section */}
       <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <div className="flex items-end justify-between mb-10">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-16 md:py-24">
+          <div className="flex items-end justify-between mb-6 sm:mb-10">
             <SectionHeader enLabel="Closing Soon" title="締め切り間近" />
             <Link
               to="/search?sort=deadline"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted hover:text-accent rounded-xl px-4 py-2 transition-colors hover:bg-accent/5"
+              className="inline-flex items-center gap-1.5 text-sm md:text-base font-medium text-muted hover:text-accent rounded-xl px-4 py-2 transition-colors hover:bg-accent/5"
             >
               すべて見る
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>

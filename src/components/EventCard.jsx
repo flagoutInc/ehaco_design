@@ -11,13 +11,14 @@ function VerticalCard({ event, className = '' }) {
   return (
     <Link
       to={`/event/${event.id}`}
-      className={`group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ehaco-border/50 transition duration-300 md:hover:-translate-y-1 hover:shadow-xl hover:ring-accent/20 ${className}`}
+      className={`group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ehaco-border/50 hover:shadow-xl hover:ring-accent/30 md:hover:-translate-y-1.5 hover:border-accent/20 transition-all duration-300 active:scale-[0.99] ${className}`}
     >
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
         <img
           src={event.image}
           alt={event.title}
+          loading="lazy"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -42,7 +43,7 @@ function VerticalCard({ event, className = '' }) {
           {event.category}
         </span>
 
-        <h3 className="mt-2.5 line-clamp-2 text-[15px] font-bold leading-snug text-ehaco-text transition group-hover:text-accent">
+        <h3 className="mt-2.5 line-clamp-2 text-base md:text-lg font-bold leading-snug text-ehaco-text transition group-hover:text-accent">
           {event.title}
         </h3>
 
@@ -54,7 +55,7 @@ function VerticalCard({ event, className = '' }) {
         </p>
 
         <div className="mt-auto pt-4 border-t border-ehaco-border/50">
-          <span className={`text-xs font-medium ${event.remaining <= 10 ? 'text-red-500' : 'text-muted'}`}>
+          <span className={`text-xs md:text-sm font-medium ${event.remaining <= 10 ? 'text-red-500' : 'text-muted'}`}>
             残り{event.remaining}席
           </span>
         </div>
@@ -72,13 +73,14 @@ function HorizontalCard({ event }) {
   return (
     <Link
       to={`/event/${event.id}`}
-      className="group flex overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ehaco-border/50 transition duration-300 hover:shadow-xl hover:ring-accent/20"
+      className="group flex flex-col sm:flex-row overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ehaco-border/50 hover:shadow-xl hover:ring-accent/30 transition-all duration-300 active:scale-[0.99]"
     >
       {/* Image */}
-      <div className="relative w-[200px] min-h-[220px] shrink-0 overflow-hidden md:w-[340px] md:min-h-[240px]">
+      <div className="relative w-full aspect-[16/9] sm:w-[200px] sm:aspect-auto sm:min-h-[220px] shrink-0 overflow-hidden md:w-[340px] md:min-h-[240px]">
         <img
           src={event.image}
           alt={event.title}
+          loading="lazy"
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <div className="absolute left-2 top-2 flex flex-col gap-1">
@@ -96,13 +98,13 @@ function HorizontalCard({ event }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col justify-between p-4 md:p-5">
+      <div className="flex flex-1 flex-col justify-between p-5 md:p-6">
         <div>
           {/* Organizer + Format badge */}
           <div className="flex items-center gap-3 mb-2">
             <div className="flex items-center gap-1.5 min-w-0">
-              <img src={event.organizerLogo} alt={event.organizer} className="h-5 w-5 rounded-full shrink-0" />
-              <span className="text-xs text-muted truncate">{event.organizer}</span>
+              <img src={event.organizerLogo} alt={event.organizer} loading="lazy" className="h-5 w-5 rounded-full shrink-0" />
+              <span className="text-xs md:text-sm text-muted truncate">{event.organizer}</span>
             </div>
             <span className={`shrink-0 rounded-md px-2 py-0.5 text-[11px] font-medium ${formatColor}`}>
               {formatLabel}
@@ -110,13 +112,13 @@ function HorizontalCard({ event }) {
           </div>
 
           {/* Title */}
-          <h3 className="line-clamp-2 text-[15px] font-bold text-ehaco-text transition group-hover:text-accent">
+          <h3 className="line-clamp-2 text-base md:text-lg font-bold text-ehaco-text transition group-hover:text-accent">
             {event.title}
           </h3>
 
           {/* Description */}
           {event.description && (
-            <p className="mt-1 line-clamp-1 text-sm text-muted">{event.description}</p>
+            <p className="mt-1 line-clamp-1 text-sm text-muted leading-relaxed">{event.description}</p>
           )}
 
           {/* Date + Location */}
@@ -136,8 +138,8 @@ function HorizontalCard({ event }) {
             </div>
           </div>
 
-          {/* Tags */}
-          <div className="mt-2 flex flex-wrap gap-1.5">
+          {/* Tags — hidden on mobile */}
+          <div className="mt-2 hidden sm:flex flex-wrap gap-1.5">
             {visibleTags.map((tag) => (
               <span key={tag} className="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-muted">
                 {tag}
