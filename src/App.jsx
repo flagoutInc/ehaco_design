@@ -21,6 +21,7 @@ import MyEventsPage from './pages/mypage/MyEventsPage'
 import FavoritesPage from './pages/mypage/FavoritesPage'
 import AccountPage from './pages/mypage/AccountPage'
 import NotificationSettingsPage from './pages/mypage/NotificationSettingsPage'
+import NotificationDetailPage from './pages/mypage/NotificationDetailPage'
 import FollowingPage from './pages/mypage/FollowingPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ApplyPage from './pages/ApplyPage'
@@ -41,6 +42,7 @@ import EventsPage from './pages/org/EventsPage'
 import NewEventPage from './pages/org/NewEventPage'
 import EventEditPage from './pages/org/EventEditPage'
 import EventPreviewPage from './pages/org/EventPreviewPage'
+import EventMessagesPage from './pages/org/EventMessagesPage'
 import SurveysPage from './pages/org/SurveysPage'
 import SurveyEditPage from './pages/org/SurveyEditPage'
 import SurveyNewPage from './pages/org/SurveyNewPage'
@@ -49,6 +51,7 @@ import TargetEditPage from './pages/org/TargetEditPage'
 import CompanyPage from './pages/org/CompanyPage'
 import StaffPage from './pages/org/StaffPage'
 import StaffEditPage from './pages/org/StaffEditPage'
+import OrgNotificationsPage from './pages/org/OrgNotificationsPage'
 import OrgLoginPage from './pages/org/OrgLoginPage'
 import OrgRegisterPage from './pages/org/OrgRegisterPage'
 
@@ -122,6 +125,12 @@ function OrgPage({ activePage, children }) {
             <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-0.5 rounded-md">主催者管理</span>
           </div>
           <div className="flex items-center gap-3">
+            <a href="#/org/notifications" className="relative text-muted hover:text-ehaco-text transition">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+              </svg>
+              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">2</span>
+            </a>
             <a href="#/" className="text-xs text-muted hover:text-accent transition flex items-center gap-1">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
@@ -134,7 +143,7 @@ function OrgPage({ activePage, children }) {
       </header>
       <OrgSidebar activePage={activePage} />
       <main className="pt-14 lg:pl-56">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 pb-20 lg:pb-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 pb-20 lg:pb-0">
           {children}
         </div>
       </main>
@@ -169,6 +178,7 @@ function App() {
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="following" element={<FollowingPage />} />
           <Route path="notifications" element={<NotificationsPage />} />
+          <Route path="notifications/:id" element={<NotificationDetailPage />} />
           <Route path="notification-settings" element={<NotificationSettingsPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="account" element={<AccountPage />} />
@@ -178,12 +188,14 @@ function App() {
       </Route>
       <Route path="/org/login" element={<OrgLoginPage />} />
       <Route path="/org/register" element={<OrgRegisterPage />} />
+      <Route path="/org/notifications" element={<OrgPage activePage="notifications"><OrgNotificationsPage /></OrgPage>} />
       <Route path="/org/dashboard" element={<OrgPage activePage="dashboard"><OrgDashboardPage /></OrgPage>} />
       <Route path="/org/applicants" element={<OrgPage activePage="applicants"><ApplicantsPage /></OrgPage>} />
       <Route path="/org/applicants/:id" element={<OrgPage activePage="applicants"><ApplicantDetailPage /></OrgPage>} />
       <Route path="/org/events" element={<OrgPage activePage="events"><EventsPage /></OrgPage>} />
       <Route path="/org/events/new" element={<OrgPage activePage="new-event"><NewEventPage /></OrgPage>} />
       <Route path="/org/events/:id/edit" element={<OrgPage activePage="events"><EventEditPage /></OrgPage>} />
+      <Route path="/org/events/:id/messages" element={<OrgPage activePage="events"><EventMessagesPage /></OrgPage>} />
       <Route path="/org/events/:id/preview" element={<OrgPage activePage="events"><EventPreviewPage /></OrgPage>} />
       <Route path="/org/surveys" element={<OrgPage activePage="surveys"><SurveysPage /></OrgPage>} />
       <Route path="/org/surveys/new" element={<OrgPage activePage="surveys"><SurveyNewPage /></OrgPage>} />

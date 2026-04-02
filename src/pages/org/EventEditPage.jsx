@@ -219,6 +219,23 @@ export default function EventEditPage() {
           </div>
         </section>
 
+        {/* ───────── 参加者への連絡 ───────── */}
+        <Link to={`/org/events/${id}/messages`}
+          className="flex items-center justify-between p-5 bg-white rounded-2xl ring-1 ring-ehaco-border/50 hover:shadow-md transition group">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition">
+              <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+            </div>
+            <div>
+              <p className="font-bold text-sm text-ehaco-text group-hover:text-accent transition">参加者への連絡</p>
+              <p className="text-xs text-muted">申込者にメールを送信・送信履歴を確認</p>
+            </div>
+          </div>
+          <svg className="w-5 h-5 text-muted group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        </Link>
+
         {/* ───────── Bottom actions ───────── */}
         <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 pb-8">
           <button

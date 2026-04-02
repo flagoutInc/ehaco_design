@@ -159,7 +159,7 @@ export default function Header() {
               }}
               className="flex items-center gap-2.5 rounded-xl py-1.5 pl-1.5 pr-3 text-ehaco-text hover:bg-gray-100 transition-colors"
             >
-              <img src={user.avatar} alt={user.name} loading="lazy" className="h-8 w-8 rounded-lg object-cover" />
+              <img src={user.avatar} alt={user.name} loading="lazy" className="h-8 w-8 rounded-full object-cover" />
               <span className="text-sm font-medium">{user.name}</span>
             </button>
 
@@ -183,6 +183,17 @@ export default function Header() {
                     {label}
                   </Link>
                 ))}
+                <div className="my-1 border-t border-ehaco-border" />
+                <Link
+                  to="/org/dashboard"
+                  className="flex items-center gap-3 px-4 py-2.5 text-base text-accent transition hover:bg-gray-50"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                  </svg>
+                  主催者サイトへ
+                </Link>
                 <div className="my-1 border-t border-ehaco-border" />
                 <Link to="/login" className="flex items-center gap-3 px-4 py-2.5 text-base text-red-500 transition hover:bg-gray-50">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
@@ -229,13 +240,20 @@ export default function Header() {
           >
             イベントを探す
           </Link>
+          <Link
+            to="/for-organizers"
+            className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            イベント掲載
+          </Link>
         </nav>
 
         <div className="mx-4 border-t border-ehaco-border/50" />
 
         <div className="px-4 py-3">
           <div className="mb-3 flex items-center gap-3">
-            <img src={user.avatar} alt={user.name} loading="lazy" className="h-10 w-10 rounded-lg object-cover" />
+            <img src={user.avatar} alt={user.name} loading="lazy" className="h-10 w-10 rounded-full object-cover" />
             <div>
               <p className="text-sm font-medium text-ehaco-text">{user.name}</p>
               <p className="text-xs text-muted">{user.email}</p>

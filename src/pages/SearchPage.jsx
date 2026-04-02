@@ -219,8 +219,8 @@ export default function SearchPage() {
             <p className="text-base md:text-lg text-muted mt-2">時代を先どる、次の一手が見つかる</p>
             <p className="text-sm text-muted/60 mt-0.5">AI活用・DX推進・組織づくりのイベント検索</p>
           </div>
-          <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-xl ring-1 ring-ehaco-border shadow-sm overflow-hidden">
-            <div className="flex items-center flex-1 px-4 md:px-5 gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center flex-1 bg-white rounded-xl border border-ehaco-border shadow-sm px-4 md:px-5 gap-3">
               <svg className="h-5 w-5 text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
@@ -232,7 +232,7 @@ export default function SearchPage() {
                 className="flex-1 py-3 text-sm md:text-base text-ehaco-text outline-none bg-transparent placeholder:text-muted/50"
               />
             </div>
-            <button className="btn-gradient text-sm font-semibold px-6 py-3 active:scale-[0.97]">
+            <button className="btn-gradient text-sm font-semibold px-6 py-3 rounded-xl shrink-0">
               検索
             </button>
           </div>

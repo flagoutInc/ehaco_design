@@ -1,5 +1,21 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { orgEvents, orgApplicants } from '../../data/orgDummy';
+
+const chartData = {
+  '日': [
+    { label: '4/1', value: 8 }, { label: '4/2', value: 12 }, { label: '4/3', value: 5 },
+    { label: '4/4', value: 15 }, { label: '4/5', value: 9 }, { label: '4/6', value: 18 }, { label: '4/7', value: 11 },
+  ],
+  '週': [
+    { label: '3/3週', value: 28 }, { label: '3/4週', value: 35 }, { label: '4/1週', value: 42 },
+    { label: '4/2週', value: 38 }, { label: '4/3週', value: 52 }, { label: '4/4週', value: 47 },
+  ],
+  '月': [
+    { label: '11月', value: 32 }, { label: '12月', value: 45 }, { label: '1月', value: 28 },
+    { label: '2月', value: 89 }, { label: '3月', value: 132 }, { label: '4月', value: 147 },
+  ],
+};
 
 const stats = [
   { label: '今月の申込数', value: '147', change: '+23', up: true, icon: 'M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z' },
@@ -9,6 +25,7 @@ const stats = [
 ];
 
 export default function OrgDashboardPage() {
+  const [chartPeriod, setChartPeriod] = useState('月');
   const activeEvents = orgEvents.filter((e) => e.status === '公開中');
   const recentApplicants = orgApplicants.slice(0, 5);
 
@@ -41,6 +58,67 @@ export default function OrgDashboardPage() {
             )}
           </div>
         ))}
+      </div>
+
+      {/* Charts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        {/* 申込数推移 */}
+        <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-bold text-ehaco-text">申込数の推移</h2>
+            <span className="text-xs text-accent cursor-pointer hover:text-accent-light transition">詳細 →</span>
+            <div className="flex bg-gray-100 rounded-lg p-0.5">
+              {['日', '週', '月'].map((p) => (
+                <button key={p} onClick={() => setChartPeriod(p)}
+                  className={`px-3 py-1 text-xs font-medium rounded-md transition ${chartPeriod === p ? 'bg-white text-ehaco-text shadow-sm' : 'text-muted hover:text-ehaco-text'}`}>{p}</button>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-end gap-3" style={{ height: '180px' }}>
+            {chartData[chartPeriod].map((d) => {
+              const maxVal = Math.max(...chartData[chartPeriod].map((x) => x.value));
+              const pct = Math.round((d.value / maxVal) * 100);
+              return (
+                <div key={d.label} className="flex-1 flex flex-col items-center justify-end h-full">
+                  <span className="text-xs font-bold text-ehaco-text mb-1">{d.value}</span>
+                  <div className="w-full rounded-md bg-accent hover:bg-accent-light transition-colors" style={{ height: `${pct}%` }} />
+                  <span className="text-xs text-muted mt-2">{d.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 申込者の業種分布 */}
+        <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-bold text-ehaco-text">申込者の業種</h2>
+            <span className="text-xs text-accent cursor-pointer hover:text-accent-light transition">詳細 →</span>
+          </div>
+          <div className="space-y-4">
+            {[
+              { label: 'IT・ソフトウェア', value: 42, color: 'bg-accent' },
+              { label: '製造業', value: 28, color: 'bg-accent-light' },
+              { label: 'コンサルティング', value: 18, color: 'bg-indigo-300' },
+              { label: '金融・保険', value: 12, color: 'bg-indigo-200' },
+              { label: 'その他', value: 47, color: 'bg-gray-300' },
+            ].map((d) => {
+              const total = 147;
+              const pct = Math.round((d.value / total) * 100);
+              return (
+                <div key={d.label}>
+                  <div className="flex items-center justify-between text-sm mb-1.5">
+                    <span className="font-medium text-ehaco-text">{d.label}</span>
+                    <span className="text-muted font-medium">{pct}%</span>
+                  </div>
+                  <div className="w-full h-4 bg-gray-100 rounded-full overflow-hidden">
+                    <div className={`h-full rounded-full ${d.color} transition-all`} style={{ width: `${pct}%` }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

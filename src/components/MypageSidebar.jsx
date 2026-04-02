@@ -46,7 +46,7 @@ export default function MypageSidebar({ activePage }) {
             const isActive = activePage === item.key;
             return (
               <Link key={item.key} to={item.to}
-                className={`flex flex-col items-center gap-1 py-2 px-3 min-w-0 transition-colors ${isActive ? 'text-accent' : 'text-muted'}`}>
+                className={`flex flex-col items-center gap-1 py-3 px-4 min-w-0 transition-colors ${isActive ? 'text-accent' : 'text-muted'}`}>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                 </svg>

@@ -13,7 +13,7 @@ export default function NotificationsPage() {
 
   const unreadCount = [...readState.values()].filter((v) => !v).length;
   const markAsRead = (id) => setReadState((prev) => { const next = new Map(prev); next.set(id, true); return next; });
-  const getNotifLink = (notif) => notif.link || (notif.eventId ? `/event/${notif.eventId}` : null);
+  const getNotifLink = (notif) => `/mypage/notifications/${notif.id}`;
   const markAllAsRead = () => setReadState((prev) => { const next = new Map(prev); for (const k of next.keys()) next.set(k, true); return next; });
 
   const filtered = filter === 'unread' ? notifData.filter((n) => !readState.get(n.id)) : notifData;

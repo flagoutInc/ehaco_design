@@ -54,11 +54,11 @@ export default function AccountPage() {
 
           {/* Name */}
           <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div><label className={labelClass}>姓（全角漢字） {req}</label><input type="text" value={form.lastNameKanji} onChange={(e) => update('lastNameKanji', e.target.value)} className={inputClass} /></div>
               <div><label className={labelClass}>名（全角漢字） {req}</label><input type="text" value={form.firstNameKanji} onChange={(e) => update('firstNameKanji', e.target.value)} className={inputClass} /></div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div><label className={labelClass}>姓（全角カナ） {req}</label><input type="text" value={form.lastNameKana} onChange={(e) => update('lastNameKana', e.target.value)} className={inputClass} /></div>
               <div><label className={labelClass}>名（全角カナ） {req}</label><input type="text" value={form.firstNameKana} onChange={(e) => update('firstNameKana', e.target.value)} className={inputClass} /></div>
             </div>

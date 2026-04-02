@@ -31,7 +31,7 @@ function Progress({ current }) {
             </div>
             <span className={`text-[10px] mt-1 hidden sm:block ${i === current ? 'text-accent font-bold' : 'text-muted'}`}>{label}</span>
           </div>
-          {i < 4 && <div className={`w-5 sm:w-8 h-0.5 mb-4 sm:mb-0 ${i < current ? 'bg-green-500' : 'bg-gray-200'}`} />}
+          {i < 4 && <div className={`w-5 sm:w-8 h-0.5 mb-1 sm:mb-0 ${i < current ? 'bg-green-500' : 'bg-gray-200'}`} />}
         </div>
       ))}
     </div>
@@ -162,11 +162,11 @@ export default function RegisterPage() {
           <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6 md:p-8">
             <h2 className="text-lg font-bold text-ehaco-text mb-6">お名前</h2>
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div><label className={labelClass}>姓（漢字） {req}</label><input type="text" value={form.lastNameKanji} onChange={(e) => update('lastNameKanji', e.target.value)} className={inputClass} placeholder="絵箱" /></div>
                 <div><label className={labelClass}>名（漢字） {req}</label><input type="text" value={form.firstNameKanji} onChange={(e) => update('firstNameKanji', e.target.value)} className={inputClass} placeholder="太郎" /></div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div><label className={labelClass}>姓（カナ） {req}</label><input type="text" value={form.lastNameKana} onChange={(e) => update('lastNameKana', e.target.value)} className={inputClass} placeholder="エハコ" /></div>
                 <div><label className={labelClass}>名（カナ） {req}</label><input type="text" value={form.firstNameKana} onChange={(e) => update('firstNameKana', e.target.value)} className={inputClass} placeholder="タロウ" /></div>
               </div>

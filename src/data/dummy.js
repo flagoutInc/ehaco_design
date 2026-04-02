@@ -688,6 +688,26 @@ export const notifications = [
     read: true,
     eventId: 6,
   },
+  {
+    id: 7,
+    type: 'organizer',
+    title: '主催者からのメッセージ',
+    message:
+      'テックイノベーション株式会社から「DX推進のためのデータ活用戦略セミナー」に関するメッセージが届きました。',
+    dateRelative: '5日前',
+    read: true,
+    eventId: 1,
+  },
+  {
+    id: 8,
+    type: 'organizer',
+    title: '参加URLのご案内',
+    message:
+      'ファインディ株式会社から「AI時代のエンジニア採用」の参加URLが届きました。',
+    dateRelative: '6日前',
+    read: true,
+    eventId: 3,
+  },
 ];
 
 export const speakers = [
@@ -711,7 +731,7 @@ export const user = {
   name: '鈴木 一郎',
   email: 'suzuki@example.com',
   avatar:
-    'https://ui-avatars.com/api/?name=IS&background=1a3a5c&color=fff&size=40',
+    'https://ui-avatars.com/api/?name=IS&background=6366f1&color=fff&size=40&rounded=true',
   company: '株式会社サンプル',
   companyUrl: 'https://sample-corp.example.com',
   phone: '03-1234-5678',

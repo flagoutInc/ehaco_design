@@ -18,7 +18,7 @@ function Progress({ current }) {
             </div>
             <span className={`text-[10px] mt-1 hidden sm:block ${i === current ? 'text-accent font-bold' : 'text-muted'}`}>{label}</span>
           </div>
-          {i < 4 && <div className={`w-6 sm:w-8 h-0.5 mb-4 sm:mb-0 ${i < current ? 'bg-green-500' : 'bg-gray-200'}`} />}
+          {i < 4 && <div className={`w-6 sm:w-8 h-0.5 mb-1 sm:mb-0 ${i < current ? 'bg-green-500' : 'bg-gray-200'}`} />}
         </div>
       ))}
     </div>
@@ -70,15 +70,15 @@ export default function NewEventPage() {
             <div>
               <label className={labelClass}>開催日時 <span className="text-red-500">*</span></label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">開始</span><input type="date" className={inputClass} value={form.startDate} onChange={(e) => set('startDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-[130px]`} value={form.startTime} onChange={(e) => set('startTime', e.target.value)} /></div>
-                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">終了</span><input type="date" className={inputClass} value={form.endDate} onChange={(e) => set('endDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-[130px]`} value={form.endTime} onChange={(e) => set('endTime', e.target.value)} /></div>
+                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">開始</span><input type="date" className={inputClass} value={form.startDate} onChange={(e) => set('startDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-full sm:max-w-[130px]`} value={form.startTime} onChange={(e) => set('startTime', e.target.value)} /></div>
+                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">終了</span><input type="date" className={inputClass} value={form.endDate} onChange={(e) => set('endDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-full sm:max-w-[130px]`} value={form.endTime} onChange={(e) => set('endTime', e.target.value)} /></div>
               </div>
             </div>
             <div>
               <label className={labelClass}>募集期間 <span className="text-red-500">*</span></label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">開始</span><input type="date" className={inputClass} value={form.recruitStartDate} onChange={(e) => set('recruitStartDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-[130px]`} value={form.recruitStartTime} onChange={(e) => set('recruitStartTime', e.target.value)} /></div>
-                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">終了</span><input type="date" className={inputClass} value={form.recruitEndDate} onChange={(e) => set('recruitEndDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-[130px]`} value={form.recruitEndTime} onChange={(e) => set('recruitEndTime', e.target.value)} /></div>
+                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">開始</span><input type="date" className={inputClass} value={form.recruitStartDate} onChange={(e) => set('recruitStartDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-full sm:max-w-[130px]`} value={form.recruitStartTime} onChange={(e) => set('recruitStartTime', e.target.value)} /></div>
+                <div className="flex items-center gap-2"><span className="text-xs text-muted shrink-0">終了</span><input type="date" className={inputClass} value={form.recruitEndDate} onChange={(e) => set('recruitEndDate', e.target.value)} /><input type="time" className={`${inputClass} max-w-full sm:max-w-[130px]`} value={form.recruitEndTime} onChange={(e) => set('recruitEndTime', e.target.value)} /></div>
               </div>
             </div>
             <div>
