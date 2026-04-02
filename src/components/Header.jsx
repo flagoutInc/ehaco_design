@@ -64,6 +64,12 @@ export default function Header() {
             イベントを探す
           </Link>
           <Link
+            to="/about"
+            className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
+          >
+            ehaco!とは
+          </Link>
+          <Link
             to="/for-organizers"
             className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >

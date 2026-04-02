@@ -83,7 +83,7 @@ export default function Footer() {
               <span className="text-3xl font-black text-white tracking-tight"><span className="text-[#4FC3F7]">e</span>haco<span className="text-[#4DB6AC]">!</span></span>
             </Link>
             <p className="mt-4 text-base leading-relaxed text-white/40">
-              AI活用・DX推進・組織づくり。
+              AI活用・DX推進・組織づくり。<br />
               ウェビナー・イベント検索サイト
             </p>
             <div className="mt-5 flex items-center gap-2">
