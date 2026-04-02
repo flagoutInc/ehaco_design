@@ -1,8 +1,8 @@
 // 主催者管理画面用ダミーデータ
 
 export const orgProfile = {
-  companyName: 'テックイノベーション株式会社',
-  displayName: 'テックイノベーション株式会社',
+  companyName: 'テックファーム株式会社',
+  displayName: 'テックファーム株式会社',
   pageUrl: 'tech-innovation',
   industry: 'IT・テクノロジー',
   employees: '100〜299名',
@@ -12,7 +12,7 @@ export const orgProfile = {
   contactEmail: 'events@tech-innovation.example.com',
   websiteUrl: 'https://tech-innovation.example.com',
   phone: '03-1234-5678',
-  description: 'テックイノベーション株式会社は、DX推進とAIソリューションを提供するテクノロジー企業です。企業のデジタル変革を支援し、最新技術の社会実装に取り組んでいます。',
+  description: 'テックファーム株式会社は、DX推進とAIソリューションを提供するテクノロジー企業です。企業のデジタル変革を支援し、最新技術の社会実装に取り組んでいます。',
 };
 
 export const orgStaff = [

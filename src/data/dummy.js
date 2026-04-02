@@ -2,9 +2,9 @@ export const events = [
   {
     id: 1,
     title: 'DX推進のためのデータ活用戦略セミナー',
-    organizer: 'テックイノベーション株式会社',
+    organizer: 'テックファーム株式会社',
     organizerLogo:
-      'https://ui-avatars.com/api/?name=TI&background=1a3a5c&color=fff&size=40',
+      'https://ui-avatars.com/api/?name=TF&background=6366f1&color=fff&size=40',
     date: '2026年4月15日（水）14:00〜16:00',
     dateShort: '4/15（水）',
     location: 'オンライン（Zoom）',
@@ -23,9 +23,9 @@ export const events = [
   {
     id: 2,
     title: 'クラウドセキュリティ最前線 2026',
-    organizer: 'セキュアクラウド株式会社',
+    organizer: '株式会社ネオキャリア',
     organizerLogo:
-      'https://ui-avatars.com/api/?name=SC&background=2d5f8a&color=fff&size=40',
+      'https://ui-avatars.com/api/?name=NC&background=e11d48&color=fff&size=40',
     date: '2026年4月18日（金）13:00〜15:00',
     dateShort: '4/18（金）',
     location: 'オンライン（Teams）',
@@ -44,9 +44,9 @@ export const events = [
   {
     id: 3,
     title: 'AI×マーケティング実践ワークショップ',
-    organizer: 'マーケテック・ラボ',
+    organizer: 'ファインディ株式会社',
     organizerLogo:
-      'https://ui-avatars.com/api/?name=ML&background=00b8d4&color=fff&size=40',
+      'https://ui-avatars.com/api/?name=FD&background=0ea5e9&color=fff&size=40',
     date: '2026年4月22日（火）10:00〜12:00',
     dateShort: '4/22（火）',
     location: '東京都渋谷区（ハイブリッド）',
@@ -84,9 +84,9 @@ export const events = [
   {
     id: 5,
     title: '成功するDXのロードマップ ― 企業と人・組織を"デザイン"する',
-    organizer: 'DXデザインラボ',
+    organizer: '株式会社サンスター',
     organizerLogo:
-      'https://ui-avatars.com/api/?name=DL&background=d4a017&color=fff&size=40',
+      'https://ui-avatars.com/api/?name=SS&background=059669&color=fff&size=40',
     date: '2026年4月28日（月）13:00〜14:30',
     dateShort: '4/28（月）',
     location: 'オンライン（Zoom）',
@@ -334,9 +334,9 @@ export const events = [
   {
     id: 17,
     title: 'ランサムウェア対策と事業継続計画',
-    organizer: 'セキュアクラウド株式会社',
+    organizer: '株式会社ネオキャリア',
     organizerLogo:
-      'https://ui-avatars.com/api/?name=SC&background=2d5f8a&color=fff&size=40',
+      'https://ui-avatars.com/api/?name=NC&background=e11d48&color=fff&size=40',
     date: '2026年6月3日（水）15:00〜17:00',
     dateShort: '6/3（水）',
     location: 'オンライン（Teams）',
@@ -502,9 +502,9 @@ export const events = [
   {
     id: 25,
     title: 'ノーコード/ローコードで実現する業務改革',
-    organizer: 'テックイノベーション株式会社',
+    organizer: 'テックファーム株式会社',
     organizerLogo:
-      'https://ui-avatars.com/api/?name=TI&background=1a3a5c&color=fff&size=40',
+      'https://ui-avatars.com/api/?name=TF&background=6366f1&color=fff&size=40',
     date: '2026年6月22日（月）14:00〜16:00',
     dateShort: '6/22（月）',
     location: 'オンライン（Zoom）',
@@ -663,7 +663,7 @@ export const notifications = [
     type: 'organizer',
     title: 'フォロー中の主催者の新着',
     message:
-      'テックイノベーション株式会社が新しいイベントを公開しました。',
+      'テックファーム株式会社が新しいイベントを公開しました。',
     dateRelative: '2日前',
     read: true,
     eventId: 5,
@@ -693,7 +693,7 @@ export const notifications = [
     type: 'organizer',
     title: '主催者からのメッセージ',
     message:
-      'テックイノベーション株式会社から「DX推進のためのデータ活用戦略セミナー」に関するメッセージが届きました。',
+      'テックファーム株式会社から「DX推進のためのデータ活用戦略セミナー」に関するメッセージが届きました。',
     dateRelative: '5日前',
     read: true,
     eventId: 1,
@@ -713,7 +713,7 @@ export const notifications = [
 export const speakers = [
   {
     name: '山田 太郎',
-    title: 'テックイノベーション株式会社 CTO',
+    title: 'テックファーム株式会社 CTO',
     photo:
       'https://ui-avatars.com/api/?name=TY&background=1a3a5c&color=fff&size=80',
     bio: 'エンタープライズDXの推進を15年以上にわたりリード。',

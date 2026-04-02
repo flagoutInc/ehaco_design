@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const followingOrgs = [
-  { id: 1, name: 'テックイノベーション株式会社', logo: 'https://ui-avatars.com/api/?name=TI&background=6366f1&color=fff&size=80', industry: 'IT・テクノロジー', followers: 1234, eventsCount: 28, latestEvent: 'DX推進のためのデータ活用戦略セミナー' },
-  { id: 2, name: 'セキュアクラウド株式会社', logo: 'https://ui-avatars.com/api/?name=SC&background=2d5f8a&color=fff&size=80', industry: 'セキュリティ', followers: 856, eventsCount: 15, latestEvent: 'クラウドセキュリティ最前線 2026' },
-  { id: 3, name: 'マーケテック・ラボ', logo: 'https://ui-avatars.com/api/?name=ML&background=10b981&color=fff&size=80', industry: 'マーケティング', followers: 2100, eventsCount: 42, latestEvent: 'AI×マーケティング実践ワークショップ' },
-  { id: 4, name: 'AIソリューションズ株式会社', logo: 'https://ui-avatars.com/api/?name=AS&background=f59e0b&color=fff&size=80', industry: 'AI・機械学習', followers: 3450, eventsCount: 35, latestEvent: '生成AI活用の最前線' },
+  { id: 1, name: 'テックファーム株式会社', logo: 'https://ui-avatars.com/api/?name=TI&background=6366f1&color=fff&size=80', industry: 'IT・テクノロジー', followers: 1234, eventsCount: 28, latestEvent: 'DX推進のためのデータ活用戦略セミナー' },
+  { id: 2, name: '株式会社ネオキャリア', logo: 'https://ui-avatars.com/api/?name=SC&background=2d5f8a&color=fff&size=80', industry: 'セキュリティ', followers: 856, eventsCount: 15, latestEvent: 'クラウドセキュリティ最前線 2026' },
+  { id: 3, name: '株式会社ミギナナメウエ', logo: 'https://ui-avatars.com/api/?name=ML&background=10b981&color=fff&size=80', industry: 'マーケティング', followers: 2100, eventsCount: 42, latestEvent: 'AI×マーケティング実践ワークショップ' },
+  { id: 4, name: 'ファインディ株式会社', logo: 'https://ui-avatars.com/api/?name=AS&background=f59e0b&color=fff&size=80', industry: 'AI・機械学習', followers: 3450, eventsCount: 35, latestEvent: '生成AI活用の最前線' },
   { id: 5, name: 'グリーンテック・ジャパン', logo: 'https://ui-avatars.com/api/?name=GT&background=059669&color=fff&size=80', industry: 'サステナビリティ', followers: 678, eventsCount: 12, latestEvent: 'GX推進セミナー 2026' },
 ];
 

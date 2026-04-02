@@ -3,9 +3,9 @@ import EventCard from '../../components/EventCard';
 import { events, user } from '../../data/dummy';
 
 const followUpdates = [
-  { organizer: 'テックイノベーション株式会社', logo: 'https://ui-avatars.com/api/?name=TI&background=6366f1&color=fff&size=40', event: events[15] || events[0], timeAgo: '2時間前' },
-  { organizer: 'セキュアクラウド株式会社', logo: 'https://ui-avatars.com/api/?name=SC&background=2d5f8a&color=fff&size=40', event: events[16] || events[1], timeAgo: '5時間前' },
-  { organizer: 'AIソリューションズ株式会社', logo: 'https://ui-avatars.com/api/?name=AS&background=f59e0b&color=fff&size=40', event: events[17] || events[2], timeAgo: '1日前' },
+  { organizer: 'テックファーム株式会社', logo: 'https://ui-avatars.com/api/?name=TI&background=6366f1&color=fff&size=40', event: events[15] || events[0], timeAgo: '2時間前' },
+  { organizer: '株式会社ネオキャリア', logo: 'https://ui-avatars.com/api/?name=SC&background=2d5f8a&color=fff&size=40', event: events[16] || events[1], timeAgo: '5時間前' },
+  { organizer: 'ファインディ株式会社', logo: 'https://ui-avatars.com/api/?name=AS&background=f59e0b&color=fff&size=40', event: events[17] || events[2], timeAgo: '1日前' },
 ];
 
 const registeredEvents = events.slice(0, 3);
