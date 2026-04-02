@@ -238,7 +238,7 @@ export const events = [
     category: 'サステナビリティ',
     tags: ['サステナビリティ', '経営', 'ESG'],
     image:
-      'https://placehold.co/400x225/16a34a/white?text=Carbon+Neutral',
+      'https://placehold.co/400x225/16a34a/white?text=%E3%82%AB%E3%83%BC%E3%83%9C%E3%83%B3%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%88%E3%83%A9%E3%83%AB',
     capacity: 120,
     remaining: 55,
     deadline: '2026年5月21日',
@@ -259,7 +259,7 @@ export const events = [
     category: '人事・HR',
     tags: ['人事・HR', '経営', '組織開発'],
     image:
-      'https://placehold.co/400x225/d97706/white?text=Talent+Mgmt',
+      'https://placehold.co/400x225/d97706/white?text=%E4%BA%BA%E7%9A%84%E8%B3%87%E6%9C%AC%E7%B5%8C%E5%96%B6',
     capacity: 200,
     remaining: 7,
     deadline: '2026年5月25日',
@@ -280,7 +280,7 @@ export const events = [
     category: 'マーケティング',
     tags: ['マーケティング', 'SEO', 'コンテンツ'],
     image:
-      'https://placehold.co/400x225/e11d48/white?text=Content+SEO',
+      'https://placehold.co/400x225/e11d48/white?text=%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84SEO',
     capacity: 60,
     remaining: 18,
     deadline: '2026年5月26日',
@@ -301,7 +301,7 @@ export const events = [
     category: 'SaaS',
     tags: ['SaaS', 'ビジネス戦略', 'グロース'],
     image:
-      'https://placehold.co/400x225/8b5cf6/white?text=SaaS+Pricing',
+      'https://placehold.co/400x225/8b5cf6/white?text=SaaS%E3%83%97%E3%83%A9%E3%82%A4%E3%82%B7%E3%83%B3%E3%82%B0',
     capacity: 100,
     remaining: 65,
     deadline: '2026年5月28日',
@@ -322,7 +322,7 @@ export const events = [
     category: 'DX推進',
     tags: ['DX推進', 'AI活用', 'IoT'],
     image:
-      'https://placehold.co/400x225/475569/white?text=Smart+Factory',
+      'https://placehold.co/400x225/475569/white?text=%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%83%AA%E3%83%BC',
     capacity: 150,
     remaining: 90,
     deadline: '2026年5月30日',
@@ -343,7 +343,7 @@ export const events = [
     category: 'セキュリティ',
     tags: ['セキュリティ', 'BCP', 'リスク管理'],
     image:
-      'https://placehold.co/400x225/991b1b/white?text=Ransomware+BCP',
+      'https://placehold.co/400x225/991b1b/white?text=%E3%83%A9%E3%83%B3%E3%82%B5%E3%83%A0%E3%82%A6%E3%82%A7%E3%82%A2%E5%AF%BE%E7%AD%96',
     capacity: 250,
     remaining: 5,
     deadline: '2026年6月2日',
@@ -364,7 +364,7 @@ export const events = [
     category: 'AI活用',
     tags: ['AI活用', 'LLM', '開発'],
     image:
-      'https://placehold.co/400x225/6d28d9/white?text=LLM+Dev',
+      'https://placehold.co/400x225/6d28d9/white?text=LLM%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA',
     capacity: 50,
     remaining: 12,
     deadline: '2026年6月3日',
@@ -385,7 +385,7 @@ export const events = [
     category: '経営',
     tags: ['経営', 'ビジネス戦略', 'KPI'],
     image:
-      'https://placehold.co/400x225/1e3a5f/white?text=Mid+Term+Plan',
+      'https://placehold.co/400x225/1e3a5f/white?text=%E4%B8%AD%E6%9C%9F%E7%B5%8C%E5%96%B6%E8%A8%88%E7%94%BB',
     capacity: 180,
     remaining: 120,
     deadline: '2026年6月7日',
@@ -406,7 +406,7 @@ export const events = [
     category: 'マーケティング',
     tags: ['マーケティング', 'SNS', '動画'],
     image:
-      'https://placehold.co/400x225/db2777/white?text=SNS+Video',
+      'https://placehold.co/400x225/db2777/white?text=SNS%C3%97%E5%8B%95%E7%94%BB%E3%83%9E%E3%83%BC%E3%82%B1',
     capacity: 100,
     remaining: 38,
     deadline: '2026年6月8日',
@@ -427,7 +427,7 @@ export const events = [
     category: 'クラウド',
     tags: ['クラウド', 'コンテナ', 'マイクロサービス'],
     image:
-      'https://placehold.co/400x225/0284c7/white?text=Cloud+Native',
+      'https://placehold.co/400x225/0284c7/white?text=%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E3%83%8D%E3%82%A4%E3%83%86%E3%82%A3%E3%83%96',
     capacity: 80,
     remaining: 3,
     deadline: '2026年6月11日',
@@ -448,7 +448,7 @@ export const events = [
     category: 'サステナビリティ',
     tags: ['サステナビリティ', 'ESG', '経営'],
     image:
-      'https://placehold.co/400x225/15803d/white?text=ESG+Investing',
+      'https://placehold.co/400x225/15803d/white?text=ESG%E6%8A%95%E8%B3%87%E6%88%A6%E7%95%A5',
     capacity: 250,
     remaining: 180,
     deadline: '2026年6月14日',
@@ -469,7 +469,7 @@ export const events = [
     category: '人事・HR',
     tags: ['人事・HR', 'ダイバーシティ', '組織開発'],
     image:
-      'https://placehold.co/400x225/b45309/white?text=DEI+Strategy',
+      'https://placehold.co/400x225/b45309/white?text=DEI%E6%88%A6%E7%95%A5',
     capacity: 200,
     remaining: 145,
     deadline: '2026年6月16日',
@@ -490,7 +490,7 @@ export const events = [
     category: '営業・CS',
     tags: ['営業・CS', 'SaaS', 'カスタマーサクセス'],
     image:
-      'https://placehold.co/400x225/f97316/white?text=CS+Conference',
+      'https://placehold.co/400x225/f97316/white?text=%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%82%B5%E3%82%AF%E3%82%BB%E3%82%B9',
     capacity: 300,
     remaining: 95,
     deadline: '2026年6月17日',
@@ -511,7 +511,7 @@ export const events = [
     category: 'DX推進',
     tags: ['DX推進', 'ノーコード', '業務効率化'],
     image:
-      'https://placehold.co/400x225/334155/white?text=No+Code+DX',
+      'https://placehold.co/400x225/334155/white?text=%E3%83%8E%E3%83%BC%E3%82%B3%E3%83%BC%E3%83%89DX',
     capacity: 500,
     remaining: 380,
     deadline: '2026年6月21日',
@@ -532,7 +532,7 @@ export const events = [
     category: 'ビジネス戦略',
     tags: ['ビジネス戦略', 'PLG', 'SaaS'],
     image:
-      'https://placehold.co/400x225/a855f7/white?text=PLG+Growth',
+      'https://placehold.co/400x225/a855f7/white?text=PLG%E3%82%B0%E3%83%AD%E3%83%BC%E3%82%B9',
     capacity: 150,
     remaining: 10,
     deadline: '2026年6月23日',
@@ -553,7 +553,7 @@ export const events = [
     category: 'データ分析',
     tags: ['データ分析', 'クラウド', 'ストリーミング'],
     image:
-      'https://placehold.co/400x225/0891b2/white?text=Realtime+Data',
+      'https://placehold.co/400x225/0891b2/white?text=%E3%83%AA%E3%82%A2%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%A0%E5%88%86%E6%9E%90',
     capacity: 80,
     remaining: 35,
     deadline: '2026年6月23日',
@@ -574,7 +574,7 @@ export const events = [
     category: '経営',
     tags: ['経営', 'スタートアップ', '資金調達'],
     image:
-      'https://placehold.co/400x225/be123c/white?text=Fundraising',
+      'https://placehold.co/400x225/be123c/white?text=%E8%B3%87%E9%87%91%E8%AA%BF%E9%81%94%E6%88%A6%E7%95%A5',
     capacity: 60,
     remaining: 22,
     deadline: '2026年6月24日',
@@ -595,7 +595,7 @@ export const events = [
     category: 'AI活用',
     tags: ['AI活用', 'DX推進', '品質管理'],
     image:
-      'https://placehold.co/400x225/4c1d95/white?text=AI+Quality',
+      'https://placehold.co/400x225/4c1d95/white?text=AI%E5%93%81%E8%B3%AA%E7%AE%A1%E7%90%86',
     capacity: 100,
     remaining: 68,
     deadline: '2026年6月27日',
@@ -616,7 +616,7 @@ export const events = [
     category: 'ビジネス戦略',
     tags: ['ビジネス戦略', 'SaaS', '経営'],
     image:
-      'https://placehold.co/400x225/1e3a5f/white?text=IPO+Prep',
+      'https://placehold.co/400x225/1e3a5f/white?text=IPO%E6%BA%96%E5%82%99',
     capacity: 120,
     remaining: 4,
     deadline: '2026年6月28日',
