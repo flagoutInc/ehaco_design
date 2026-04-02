@@ -212,15 +212,15 @@ export default function SearchPage() {
   return (
     <div className="min-h-screen bg-ehaco-bg fade-in">
       {/* ─── Search Bar ─── */}
-      <div className="bg-gradient-to-b from-accent/5 to-white border-b border-ehaco-border">
-        <div className="max-w-3xl mx-auto px-4 py-8 md:py-10">
-          <div className="text-center mb-6">
-            <span className="text-4xl md:text-5xl font-black tracking-tight inline-block"><span className="text-[#4FC3F7]">e</span>haco<span className="text-[#4DB6AC]">!</span></span>
-            <p className="text-base md:text-lg text-muted mt-2">時代を先どる、次の一手が見つかる</p>
-            <p className="text-sm text-muted/60 mt-0.5">AI活用・DX推進・組織づくりのイベント検索</p>
+      <div className="bg-white border-b border-ehaco-border">
+        <div className="max-w-3xl mx-auto px-4 py-6 md:py-8">
+          <div className="text-center mb-5">
+            <span className="text-2xl md:text-3xl font-black tracking-tight inline-block"><span className="text-[#4FC3F7]">e</span>haco<span className="text-[#4DB6AC]">!</span></span>
+            <p className="text-sm text-muted mt-1">時代を先どる、次の一手が見つかる</p>
+            <p className="text-xs text-muted/60 mt-0.5">AI活用・DX推進・組織づくりのイベント検索</p>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center flex-1 bg-white rounded-xl border border-ehaco-border shadow-sm px-4 md:px-5 gap-3">
+            <div className="flex items-center flex-1 bg-ehaco-bg rounded-xl border border-ehaco-border px-4 md:px-5 gap-3">
               <svg className="h-5 w-5 text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>

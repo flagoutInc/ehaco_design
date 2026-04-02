@@ -33,6 +33,8 @@ import CompanyInfoPage from './pages/CompanyInfoPage'
 import TermsPage from './pages/TermsPage'
 import OrgTermsPage from './pages/OrgTermsPage'
 import PrivacyPage from './pages/PrivacyPage'
+import ContactPage from './pages/ContactPage'
+import ContactOrgPage from './pages/ContactOrgPage'
 import MypageSidebar from './components/MypageSidebar'
 import OrgSidebar from './components/OrgSidebar'
 import OrgDashboardPage from './pages/org/OrgDashboardPage'
@@ -168,6 +170,8 @@ function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/terms/organizer" element={<OrgTermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/contact/organizer" element={<ContactOrgPage />} />
         <Route path="/event/:id" element={<EventDetailPage />} />
         <Route path="/event/:id/apply" element={<ApplyPage />} />
         <Route path="/event/:id/apply/complete" element={<ApplyCompletePage />} />
