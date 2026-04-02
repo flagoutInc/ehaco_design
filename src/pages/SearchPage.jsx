@@ -212,12 +212,12 @@ export default function SearchPage() {
   return (
     <div className="min-h-screen bg-ehaco-bg fade-in">
       {/* ─── Search Bar ─── */}
-      <div className="bg-white border-b border-ehaco-border">
-        <div className="max-w-3xl mx-auto px-4 py-6 md:py-8">
+      <div className="bg-gradient-to-b from-accent/5 to-white border-b border-ehaco-border">
+        <div className="max-w-3xl mx-auto px-4 py-8 md:py-10">
           <div className="text-center mb-6">
-            <h1 className="text-xl md:text-3xl font-black text-gradient tracking-tight">
-              イベントを探す
-            </h1>
+            <span className="text-4xl md:text-5xl font-black tracking-tight inline-block"><span className="text-[#4FC3F7]">e</span>haco<span className="text-[#4DB6AC]">!</span></span>
+            <p className="text-base md:text-lg text-muted mt-2">時代を先どる、次の一手が見つかる</p>
+            <p className="text-sm text-muted/60 mt-0.5">AI活用・DX推進・組織づくりのイベント検索</p>
           </div>
           <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-xl ring-1 ring-ehaco-border shadow-sm overflow-hidden">
             <div className="flex items-center flex-1 px-4 md:px-5 gap-3">

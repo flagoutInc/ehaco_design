@@ -10,14 +10,14 @@ export default function ForOrganizersPage() {
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
         </div>
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
+          <span className="text-4xl md:text-5xl font-black tracking-tight inline-block mb-4"><span className="text-[#4FC3F7]">e</span>haco<span className="text-[#4DB6AC]">!</span></span>
           <p className="text-sm font-semibold text-accent-light uppercase tracking-widest mb-4">FOR ORGANIZERS</p>
           <h1 className="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-5">
-            イベントを開催するだけで、<br />
-            リードが手に入る。
+            時代の最前線を、<br />イベントで届ける。
           </h1>
           <p className="text-base md:text-lg text-white/60 max-w-xl mx-auto mb-10">
-            参加者の業種・企業規模・職種・役職。<br />
-            イベント後の営業活動に必要なデータが、申込時に自動で集まります。
+            AI活用・DX推進・組織づくり。<br />
+            テクノロジー領域の知見をイベントで届けて、質の高いリードを獲得。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link to="/org/register" className="btn-gradient font-bold px-8 py-4 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all active:scale-[0.97]">
