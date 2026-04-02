@@ -55,7 +55,7 @@ export default function OrgDashboardPage() {
               const pct = Math.round((event.applicants / event.capacity) * 100);
               return (
                 <div key={event.id} className="flex gap-4 items-start">
-                  <img src={event.image} alt="" className="w-16 h-11 rounded-lg object-cover flex-shrink-0" />
+                  <img src={event.image} alt={event.title} className="w-16 h-11 rounded-lg object-cover flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <Link to={`/org/events/${event.id}/edit`} className="text-sm font-medium text-ehaco-text hover:text-accent transition line-clamp-1">
                       {event.title}

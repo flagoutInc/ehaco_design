@@ -271,8 +271,9 @@ export default function SurveyEditPage() {
 
         {/* Bottom Actions */}
         <div className="flex flex-col items-center gap-4 mt-8">
-          <button className="w-full max-w-xs py-3 rounded-xl btn-gradient font-bold text-sm transition shadow-sm">
-            作成する
+          <button onClick={() => { alert('保存しました'); window.location.hash = '/org/surveys'; }}
+            className="w-full max-w-xs py-3 rounded-xl btn-gradient font-bold text-sm transition shadow-sm cursor-pointer active:scale-[0.97]">
+            保存
           </button>
         </div>
 

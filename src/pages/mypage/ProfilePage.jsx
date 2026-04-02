@@ -13,7 +13,6 @@ export default function ProfilePage() {
     <div className="fade-in">
       <div className="max-w-2xl">
         <div className="mb-10">
-          <div className="h-1.5 w-16 bg-accent rounded-full mb-4" />
           <h1 className="text-2xl md:text-3xl font-black tracking-tight text-ehaco-text">プロフィール設定</h1>
         </div>
 
@@ -58,7 +57,7 @@ export default function ProfilePage() {
         </div>
 
         <div className="flex justify-end mt-10 pb-8">
-          <button className="btn-gradient font-medium px-10 py-3.5 rounded-xl text-base shadow-sm transition cursor-pointer active:scale-[0.97]">保存</button>
+          <button className="btn-gradient font-medium px-10 py-3.5 rounded-xl text-base shadow-sm transition cursor-pointer active:scale-[0.97]"onClick={() => alert('保存しました')}>保存</button>
         </div>
       </div>
     </div>

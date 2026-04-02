@@ -75,7 +75,7 @@ export default function StaffEditPage() {
             </button>
           ) : <div />}
           <button type="button"
-            className="w-full sm:w-auto px-8 py-3 btn-gradient shadow-sm rounded-lg text-sm font-semibold transition cursor-pointer active:scale-[0.97]">
+            className="w-full sm:w-auto px-8 py-3 btn-gradient shadow-sm rounded-lg text-sm font-semibold transition cursor-pointer active:scale-[0.97]" onClick={() => { alert('保存しました'); window.location.hash = '/org/staff'; }}>
             保存
           </button>
         </div>

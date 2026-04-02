@@ -40,7 +40,6 @@ export default function AccountPage() {
     <div className="fade-in">
       <div className="max-w-3xl">
         <div className="mb-8">
-          <div className="h-1.5 w-16 bg-accent rounded-full mb-4" />
           <h1 className="text-2xl md:text-3xl font-black tracking-tight text-ehaco-text">アカウント設定</h1>
         </div>
 
@@ -131,11 +130,11 @@ export default function AccountPage() {
           </div>
 
           <div className="hidden sm:flex justify-end pb-8">
-            <button className="btn-gradient font-medium px-8 py-3 rounded-xl shadow-sm transition cursor-pointer active:scale-[0.97]">保存</button>
+            <button className="btn-gradient font-medium px-8 py-3 rounded-xl shadow-sm transition cursor-pointer active:scale-[0.97]"onClick={() => alert('保存しました')}>保存</button>
           </div>
           {/* Mobile: sticky save button */}
           <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-ehaco-border p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-40">
-            <button className="w-full btn-gradient font-medium py-3 rounded-xl shadow-sm transition cursor-pointer active:scale-[0.97]">保存</button>
+            <button className="w-full btn-gradient font-medium py-3 rounded-xl shadow-sm transition cursor-pointer active:scale-[0.97]"onClick={() => alert('保存しました')}>保存</button>
           </div>
         </div>
       </div>

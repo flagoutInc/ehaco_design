@@ -136,7 +136,7 @@ export default function TargetEditPage() {
           <button className="border border-red-300 text-red-500 hover:bg-red-50 rounded-lg px-6 py-2.5 text-sm font-medium transition cursor-pointer" disabled={isUsed}>
             削除
           </button>
-          <button className="btn-gradient font-medium px-8 py-2.5 rounded-lg transition shadow-sm cursor-pointer active:scale-[0.97]" disabled={isUsed}>
+          <button className="btn-gradient font-medium px-8 py-2.5 rounded-lg transition shadow-sm cursor-pointer active:scale-[0.97]" disabled={isUsed} onClick={() => alert('保存しました')}>
             保存
           </button>
         </div>

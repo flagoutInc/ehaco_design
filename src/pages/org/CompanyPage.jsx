@@ -102,7 +102,7 @@ export default function CompanyPage() {
         </div>
 
         <div className="flex justify-end">
-          <button className="btn-gradient font-medium px-8 py-2.5 rounded-lg transition shadow-sm cursor-pointer active:scale-[0.97]">保存</button>
+          <button className="btn-gradient font-medium px-8 py-2.5 rounded-lg transition shadow-sm cursor-pointer active:scale-[0.97]"onClick={() => alert('保存しました')}>保存</button>
         </div>
       </div>
     </div>

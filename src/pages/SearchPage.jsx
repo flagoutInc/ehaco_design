@@ -215,10 +215,9 @@ export default function SearchPage() {
       <div className="bg-white border-b border-ehaco-border">
         <div className="max-w-3xl mx-auto px-4 py-6 md:py-8">
           <div className="text-center mb-6">
-            <h1 className="text-xl md:text-3xl font-black text-gradient tracking-tight mb-3">
-              テクノロジー領域のイベントを探す
+            <h1 className="text-xl md:text-3xl font-black text-gradient tracking-tight">
+              イベントを探す
             </h1>
-            <img src="/ehaco_design/ehaco-logo.png" alt="ehaco!" className="h-10 md:h-14 mx-auto object-contain" />
           </div>
           <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-xl ring-1 ring-ehaco-border shadow-sm overflow-hidden">
             <div className="flex items-center flex-1 px-4 md:px-5 gap-3">

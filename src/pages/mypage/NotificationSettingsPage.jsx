@@ -14,7 +14,6 @@ export default function NotificationSettingsPage() {
     <div className="fade-in">
       <div className="max-w-xl">
         <div className="mb-10">
-          <div className="h-1.5 w-16 bg-accent rounded-full mb-4" />
           <h1 className="text-2xl md:text-3xl font-black tracking-tight text-ehaco-text">お知らせ設定</h1>
         </div>
 

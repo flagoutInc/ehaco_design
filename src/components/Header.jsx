@@ -64,12 +64,6 @@ export default function Header() {
             イベントを探す
           </Link>
           <Link
-            to="/about"
-            className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
-          >
-            ehaco!とは
-          </Link>
-          <Link
             to="/for-organizers"
             className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >
@@ -190,17 +184,6 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="my-1 border-t border-ehaco-border" />
-                <Link
-                  to="/org/dashboard"
-                  className="flex items-center gap-3 px-4 py-2.5 text-base text-accent transition hover:bg-gray-50"
-                  onClick={() => setUserMenuOpen(false)}
-                >
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5M3.75 3v18m16.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                  </svg>
-                  主催者管理
-                </Link>
-                <div className="my-1 border-t border-ehaco-border" />
                 <Link to="/login" className="flex items-center gap-3 px-4 py-2.5 text-base text-red-500 transition hover:bg-gray-50">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
@@ -246,20 +229,6 @@ export default function Header() {
           >
             イベントを探す
           </Link>
-          <Link
-            to="/about"
-            className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            ehaco!とは
-          </Link>
-          <Link
-            to="/for-organizers"
-            className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            イベント掲載
-          </Link>
         </nav>
 
         <div className="mx-4 border-t border-ehaco-border/50" />
@@ -290,16 +259,6 @@ export default function Header() {
         </div>
 
         <div className="mx-4 border-t border-ehaco-border/50" />
-
-        <div className="px-4 py-3">
-          <Link
-            to="/org/dashboard"
-            className="block rounded-xl px-3 py-2.5 text-sm text-accent font-medium hover:bg-accent/5 transition"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            主催者管理
-          </Link>
-        </div>
 
         <div className="mx-4 border-t border-ehaco-border/50" />
 

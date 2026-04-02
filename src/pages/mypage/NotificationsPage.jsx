@@ -13,6 +13,7 @@ export default function NotificationsPage() {
 
   const unreadCount = [...readState.values()].filter((v) => !v).length;
   const markAsRead = (id) => setReadState((prev) => { const next = new Map(prev); next.set(id, true); return next; });
+  const getNotifLink = (notif) => notif.link || (notif.eventId ? `/event/${notif.eventId}` : null);
   const markAllAsRead = () => setReadState((prev) => { const next = new Map(prev); for (const k of next.keys()) next.set(k, true); return next; });
 
   const filtered = filter === 'unread' ? notifData.filter((n) => !readState.get(n.id)) : notifData;
@@ -60,23 +61,30 @@ export default function NotificationsPage() {
         <div className="space-y-2">
           {filtered.map((notif) => {
             const isRead = readState.get(notif.id);
-            return (
-              <button key={notif.id} onClick={() => markAsRead(notif.id)}
-                className={`w-full text-left flex items-start gap-4 p-4 rounded-xl transition hover:shadow-md cursor-pointer ${
-                  !isRead ? 'bg-accent/5 ring-1 ring-accent/20' : 'bg-white ring-1 ring-ehaco-border/50'
-                }`}>
-                <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-2 ${!isRead ? 'bg-accent' : 'bg-transparent'}`} />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className={`w-2 h-2 rounded-full shrink-0 ${typeColors[notif.type] || 'bg-gray-400'}`} />
-                    <p className={`text-base leading-snug ${!isRead ? 'font-bold text-ehaco-text' : 'font-medium text-ehaco-text'}`}>
-                      {notif.title}
-                    </p>
-                  </div>
-                  <p className="text-sm text-muted line-clamp-1 mt-0.5">{notif.message}</p>
+            const link = getNotifLink(notif);
+            const cls = `w-full text-left flex items-start gap-4 p-4 rounded-xl transition hover:shadow-md cursor-pointer ${
+              !isRead ? 'bg-accent/5 ring-1 ring-accent/20' : 'bg-white ring-1 ring-ehaco-border/50'
+            }`;
+            const inner = (<>
+              <div className={`w-2.5 h-2.5 rounded-full shrink-0 mt-2 ${!isRead ? 'bg-accent' : 'bg-transparent'}`} />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className={`w-2 h-2 rounded-full shrink-0 ${typeColors[notif.type] || 'bg-gray-400'}`} />
+                  <p className={`text-base leading-snug ${!isRead ? 'font-bold text-ehaco-text' : 'font-medium text-ehaco-text'}`}>
+                    {notif.title}
+                  </p>
                 </div>
-                <span className="text-xs text-muted shrink-0 mt-1">{notif.dateRelative}</span>
-              </button>
+                <p className="text-sm text-muted line-clamp-1 mt-0.5">{notif.message}</p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0 mt-1">
+                <span className="text-xs text-muted">{notif.dateRelative}</span>
+                {link && <svg className="w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>}
+              </div>
+            </>);
+            return link ? (
+              <Link key={notif.id} to={link} onClick={() => markAsRead(notif.id)} className={cls}>{inner}</Link>
+            ) : (
+              <button key={notif.id} onClick={() => markAsRead(notif.id)} className={cls}>{inner}</button>
             );
           })}
         </div>

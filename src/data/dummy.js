@@ -636,6 +636,7 @@ export const notifications = [
       '「DX推進のためのデータ活用戦略セミナー」への申込が完了しました。',
     dateRelative: '2時間前',
     read: false,
+    eventId: 1,
   },
   {
     id: 2,
@@ -645,6 +646,7 @@ export const notifications = [
       '「クラウドセキュリティ最前線 2026」が明日開催されます。',
     dateRelative: '3時間前',
     read: false,
+    eventId: 2,
   },
   {
     id: 3,
@@ -654,6 +656,7 @@ export const notifications = [
       'あなたの興味に基づくおすすめ：「AI×マーケティング実践ワークショップ」',
     dateRelative: '昨日',
     read: true,
+    eventId: 3,
   },
   {
     id: 4,
@@ -663,6 +666,7 @@ export const notifications = [
       'テックイノベーション株式会社が新しいイベントを公開しました。',
     dateRelative: '2日前',
     read: true,
+    eventId: 5,
   },
   {
     id: 5,
@@ -672,6 +676,7 @@ export const notifications = [
       'プロフィール情報を更新すると、よりパーソナライズされたイベント情報をお届けします。',
     dateRelative: '3日前',
     read: true,
+    link: '/mypage/account',
   },
   {
     id: 6,
@@ -681,6 +686,7 @@ export const notifications = [
       '「サステナビリティ経営と脱炭素戦略」の開催時間が変更されました。',
     dateRelative: '4日前',
     read: true,
+    eventId: 6,
   },
 ];
 

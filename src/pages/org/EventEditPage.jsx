@@ -94,7 +94,7 @@ export default function EventEditPage() {
               <div>
                 <span className="text-xs text-muted mb-1 block">開催日</span>
                 <input
-                  type="date"
+                  type="text"
                   className={inputClass}
                   value={form.date}
                   onChange={(e) => set('date', e.target.value)}
@@ -229,7 +229,8 @@ export default function EventEditPage() {
           </button>
           <button
             type="button"
-            className="w-full sm:w-auto px-8 py-3 btn-gradient shadow-sm rounded-lg text-sm font-semibold transition"
+            onClick={() => { alert('保存しました'); window.location.hash = '/org/events'; }}
+            className="w-full sm:w-auto px-8 py-3 btn-gradient shadow-sm rounded-lg text-sm font-semibold transition cursor-pointer active:scale-[0.97]"
           >
             保存
           </button>

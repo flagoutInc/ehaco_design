@@ -17,7 +17,6 @@ import SettingsPage from './pages/mypage/SettingsPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import PasswordResetPage from './pages/PasswordResetPage'
-import HomePage from './pages/HomePage'
 import MyEventsPage from './pages/mypage/MyEventsPage'
 import FavoritesPage from './pages/mypage/FavoritesPage'
 import AccountPage from './pages/mypage/AccountPage'
@@ -135,7 +134,7 @@ function OrgPage({ activePage, children }) {
       </header>
       <OrgSidebar activePage={activePage} />
       <main className="pt-14 lg:pl-56">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 pb-20 lg:pb-8">
           {children}
         </div>
       </main>
@@ -153,7 +152,6 @@ function App() {
       <Route path="/password-reset" element={<PasswordResetPage />} />
       <Route element={<Layout />}>
         <Route path="/" element={<SearchPage />} />
-        <Route path="/home" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/for-organizers" element={<ForOrganizersPage />} />
