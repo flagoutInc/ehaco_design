@@ -18,7 +18,7 @@ export default function EventDetailPage() {
     <div className="min-h-screen bg-ehaco-bg pb-20 lg:pb-0 fade-in">
       {/* Full-bleed banner image */}
       <img
-        src={event.image}
+        src="https://placehold.co/1400x500/0f172a/white?text=DX+Seminar"
         alt={event.title}
         loading="lazy"
         className="w-full h-[240px] md:h-[360px] object-cover"
