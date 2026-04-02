@@ -153,7 +153,8 @@ export default function SurveysPage() {
                     </button>
                     {openMenuId === survey.id && (
                       <div className="absolute right-0 top-full mt-1 w-36 bg-white rounded-lg shadow-lg border border-ehaco-border py-1 z-10">
-                        <button className="w-full text-left px-4 py-2 text-sm text-ehaco-text hover:bg-ehaco-bg">編集</button>
+                        <Link to={`/org/surveys/${survey.id}`} className="block px-4 py-2 text-sm text-ehaco-text hover:bg-ehaco-bg">編集</Link>
+                        <Link to={`/org/surveys/${survey.id}/results`} className="block px-4 py-2 text-sm text-ehaco-text hover:bg-ehaco-bg">集計結果</Link>
                         <button className="w-full text-left px-4 py-2 text-sm text-ehaco-text hover:bg-ehaco-bg">複製</button>
                         <button className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">削除</button>
                       </div>

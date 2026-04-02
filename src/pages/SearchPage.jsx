@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { events, categories, areas } from '../data/dummy';
 import EventCard from '../components/EventCard';
 
@@ -14,11 +15,15 @@ const filterDefs = [
 ];
 
 export default function SearchPage() {
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [searchParams] = useSearchParams();
+  const initialQ = searchParams.get('q') || '';
+  const initialIndustry = searchParams.getAll('industry');
+
+  const [selectedCategories, setSelectedCategories] = useState(initialIndustry.length > 0 ? initialIndustry : []);
   const [selectedAreas, setSelectedAreas] = useState([]);
   const [selectedFormat, setSelectedFormat] = useState('すべて');
   const [sortBy, setSortBy] = useState('新着順');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialQ);
   const [activeModal, setActiveModal] = useState(null); // 'category' | 'area' | 'format' | null
 
   // Lock body scroll when modal is open
@@ -110,16 +115,69 @@ export default function SearchPage() {
   ];
 
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 768);
   const loadMoreRef = useRef(null);
   const isIdle = !searchQuery && !hasActiveFilters;
   const recommendedEvents = events.slice(0, 8);
   const scrollRef = useRef(null);
-  const visibleEvents = events.slice(0, visibleCount);
-  const hasMore = visibleCount < events.length;
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
+
+  // Filter events based on search query and selected filters
+  const filteredEvents = events.filter((event) => {
+    // Text search: match title, organizer, tags, category, description
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      const searchable = [event.title, event.organizer, event.category, event.description, ...(event.tags || [])].join(' ').toLowerCase();
+      if (!searchable.includes(q)) return false;
+    }
+    // Category filter
+    if (selectedCategories.length > 0) {
+      const eventCats = [event.category, ...(event.tags || [])];
+      if (!selectedCategories.some((c) => eventCats.includes(c))) return false;
+    }
+    // Area filter
+    if (selectedAreas.length > 0) {
+      if (!selectedAreas.some((a) => (event.location || '').includes(a) || (event.area || '') === a)) return false;
+    }
+    // Format filter
+    if (selectedFormat !== 'すべて') {
+      const loc = (event.location || '').toLowerCase();
+      if (selectedFormat === 'オンライン' && !loc.includes('オンライン')) return false;
+      if (selectedFormat === 'オフライン' && loc.includes('オンライン')) return false;
+      if (selectedFormat === 'ハイブリッド' && !loc.includes('ハイブリッド')) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  const sortedEvents = [...filteredEvents].sort((a, b) => {
+    if (sortBy === '人気順') return (a.remaining / a.capacity) - (b.remaining / b.capacity); // fewer remaining = more popular
+    if (sortBy === '締め切り順') return a.isDeadlineSoon === b.isDeadlineSoon ? 0 : a.isDeadlineSoon ? -1 : 1;
+    return 0; // 新着順 = default order
+  });
+
+  // PC: pagination, Mobile: infinite scroll
+  const totalPages = Math.ceil(sortedEvents.length / PAGE_SIZE);
+  const visibleEvents = isMobile
+    ? sortedEvents.slice(0, visibleCount)
+    : sortedEvents.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const hasMore = isMobile && visibleCount < sortedEvents.length;
+
+  // Reset when filters change
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategories, selectedAreas, selectedFormat, sortBy]);
 
   const loadMore = useCallback(() => {
-    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, events.length));
-  }, []);
+    setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, sortedEvents.length));
+  }, [sortedEvents.length]);
 
   useEffect(() => {
     const el = loadMoreRef.current;
@@ -158,9 +216,8 @@ export default function SearchPage() {
         <div className="max-w-3xl mx-auto px-4 py-6 md:py-8">
           <div className="text-center mb-6">
             <h1 className="text-xl md:text-3xl font-black text-gradient tracking-tight mb-3">
-              そのビジネス課題、ここで解決につながるヒントが見つかる。
+              テクノロジー領域のイベントを探す
             </h1>
-            <p className="text-sm md:text-base leading-relaxed text-muted mb-4">デジタル・テクノロジー分野のウェビナー・イベントを探すなら</p>
             <img src="/ehaco_design/ehaco-logo.png" alt="ehaco!" className="h-10 md:h-14 mx-auto object-contain" />
           </div>
           <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-xl ring-1 ring-ehaco-border shadow-sm overflow-hidden">
@@ -202,7 +259,7 @@ export default function SearchPage() {
               >
                 {f.label}
                 {count > 0 && (
-                  <span className="bg-accent text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                  <span className="bg-accent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
                     {count}
                   </span>
                 )}
@@ -267,7 +324,7 @@ export default function SearchPage() {
         {isIdle && (
           <div className="mb-10">
             <div className="mb-8">
-              <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">Recommended</p>
+              <p className="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">Recommended</p>
               <h2 className="text-2xl md:text-3xl font-black text-ehaco-text tracking-tight">おすすめのイベント</h2>
             </div>
             <div className="relative">
@@ -309,7 +366,7 @@ export default function SearchPage() {
         {/* ─── イベント一覧（常に表示） ─── */}
         {isIdle && (
           <div className="border-t border-ehaco-border pt-10 mb-8">
-            <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">All Events</p>
+            <p className="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">All Events</p>
             <h2 className="text-2xl md:text-3xl font-black text-ehaco-text tracking-tight">すべてのイベント</h2>
           </div>
         )}
@@ -317,7 +374,7 @@ export default function SearchPage() {
         {/* Results Top Bar: Count + Sort */}
         <div className="flex items-center justify-between mb-5 md:mb-6">
               <p className="text-sm text-muted">
-                <span className="text-2xl font-black text-ehaco-text">{events.length}</span>
+                <span className="text-2xl font-black text-ehaco-text">{sortedEvents.length}</span>
                 <span className="ml-1">件のイベント</span>
               </p>
               {/* PC: segment control */}
@@ -367,10 +424,47 @@ export default function SearchPage() {
               </div>
             )}
 
-            {/* Infinite scroll sentinel */}
+            {/* Mobile: Infinite scroll sentinel */}
             {hasMore && (
-              <div ref={loadMoreRef} className="flex justify-center py-8">
+              <div ref={loadMoreRef} className="flex justify-center py-8 md:hidden">
                 <div className="h-6 w-6 border-2 border-accent/30 border-t-accent rounded-full animate-spin" />
+              </div>
+            )}
+
+            {/* PC: Pagination */}
+            {!isMobile && totalPages > 1 && (
+              <div className="hidden md:flex items-center justify-center gap-1 py-8">
+                <button
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="w-9 h-9 flex items-center justify-center rounded-lg border border-ehaco-border text-muted hover:text-ehaco-text hover:border-accent/30 transition disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-medium transition ${
+                      currentPage === page
+                        ? 'bg-accent text-white shadow-sm'
+                        : 'border border-ehaco-border text-muted hover:text-ehaco-text hover:border-accent/30'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="w-9 h-9 flex items-center justify-center rounded-lg border border-ehaco-border text-muted hover:text-ehaco-text hover:border-accent/30 transition disabled:opacity-30 disabled:cursor-not-allowed"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
               </div>
             )}
       </div>
@@ -446,7 +540,7 @@ export default function SearchPage() {
                 onClick={() => setActiveModal(null)}
                 className="flex-1 py-2.5 bg-accent text-white rounded-xl text-sm font-semibold hover:bg-accent-light transition"
               >
-                適用する（{events.length}件）
+                適用する（{filteredEvents.length}件）
               </button>
             </div>
           </div>

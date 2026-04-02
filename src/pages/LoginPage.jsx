@@ -128,7 +128,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ehaco-text transition"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg text-muted hover:text-ehaco-text hover:bg-gray-100 transition"
                     aria-label={showPassword ? 'パスワードを隠す' : 'パスワードを表示'}
                   >
                     {showPassword ? (
@@ -176,9 +176,9 @@ export default function LoginPage() {
 
           {/* Forgot password */}
           <div className="mt-5 text-center">
-            <a href="#" className="text-sm text-accent hover:text-accent-light transition">
+            <Link to="/password-reset" className="text-sm text-accent hover:text-accent-light transition">
               パスワードをお忘れの方はこちら
-            </a>
+            </Link>
           </div>
 
           {/* Register CTA */}
@@ -188,20 +188,17 @@ export default function LoginPage() {
               <br />
               以下のボタンより新規会員登録をお願いいたします。
             </p>
-            <a
-              href="https://ehaco.net/register"
+            <Link
+              to="/register"
               className="mt-4 inline-block w-full max-w-xs rounded-md btn-gradient py-3.5 text-sm font-semibold transition active:scale-[0.97]"
             >
               会員登録（無料）
-            </a>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Simple footer */}
-      <footer className="py-6 text-center">
-        <p className="text-xs text-muted">&copy; FLAGOUT Inc. All Rights Reserved.</p>
-      </footer>
     </div>
   );
 }

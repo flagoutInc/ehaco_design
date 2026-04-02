@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { orgEvents } from '../../data/orgDummy';
 
-const statusTabs = ['すべて', '受付中', '公開前', '下書き', '終了'];
+const statusTabs = ['すべて', '公開中', '公開前', '下書き', '終了'];
 
 function statusBadge(status) {
   const map = {
-    '受付中': 'bg-green-100 text-green-700 border border-green-200',
+    '公開中': 'bg-green-100 text-green-700 border border-green-200',
     '公開前': 'bg-blue-100 text-blue-700 border border-blue-200',
     '下書き': 'bg-gray-100 text-gray-500 border border-gray-200',
     '終了': 'bg-gray-100 text-gray-500 border border-gray-200',
@@ -37,7 +37,7 @@ export default function EventsPage() {
     <div className="fade-in">
       {/* Page header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-        <h1 className="text-2xl md:text-3xl font-black text-ehaco-text border-l-4 border-accent pl-4">イベントページ</h1>
+        <h1 className="text-2xl md:text-3xl font-black text-ehaco-text border-l-4 border-accent pl-4">イベント一覧</h1>
         <Link
           to="/org/events/new"
           className="inline-flex items-center justify-center gap-1.5 btn-gradient font-medium text-sm px-5 py-2.5 rounded-lg shadow-sm transition-colors shrink-0"
@@ -45,7 +45,7 @@ export default function EventsPage() {
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
-          イベント新規登録
+          イベント作成
         </Link>
       </div>
 
@@ -55,7 +55,7 @@ export default function EventsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Date range */}
           <div>
-            <label className="block text-xs font-medium text-muted mb-1">開催日（開始）</label>
+            <label className="block text-xs font-medium text-muted mb-1">開始日</label>
             <input
               type="date"
               value={dateFrom}
@@ -64,7 +64,7 @@ export default function EventsPage() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-muted mb-1">開催日（終了）</label>
+            <label className="block text-xs font-medium text-muted mb-1">終了日</label>
             <input
               type="date"
               value={dateTo}
@@ -169,7 +169,7 @@ export default function EventsPage() {
 
                   {/* Title */}
                   <Link
-                    to={`/org/events/${ev.id}`}
+                    to={`/org/events/${ev.id}/edit`}
                     className="text-lg md:text-xl font-bold text-ehaco-text hover:text-accent transition line-clamp-2 leading-snug"
                   >
                     {ev.title}

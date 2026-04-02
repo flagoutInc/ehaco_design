@@ -1,140 +1,143 @@
-import MypageSidebar from '../../components/MypageSidebar';
+import { useState } from 'react';
 import { user } from '../../data/dummy';
 
-const externalAccounts = [
-  {
-    name: 'Google',
-    connected: true,
-    color: 'text-red-500',
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
-        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Facebook',
-    connected: false,
-    color: 'text-blue-600',
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2" />
-      </svg>
-    ),
-  },
-  {
-    name: 'LinkedIn',
-    connected: false,
-    color: 'text-blue-700',
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0A66C2" />
-      </svg>
-    ),
-  },
-];
+const industries = ['IT・ソフトウェア', '製造業', '金融・保険', '商社・卸売', '小売・流通', '建設・不動産', '通信・インフラ', 'メディア・広告', 'コンサルティング', '医療・製薬', '教育', '官公庁・自治体', 'その他'];
+const bizTypes = ['BtoB', 'BtoC', 'BtoBtoC', 'CtoC', 'その他'];
+const employeeSizes = ['1〜9名', '10〜49名', '50〜99名', '100〜299名', '300〜499名', '500〜999名', '1,000〜4,999名', '5,000名以上'];
+const revenueSizes = ['1億円未満', '1億〜10億円', '10億〜50億円', '50億〜100億円', '100億〜500億円', '500億〜1,000億円', '1,000億円以上'];
+const departments = ['経営・経営企画', '情報システム', 'DX推進', 'マーケティング', '営業', '人事・総務', '広報・IR', '研究・開発', '製造・生産', 'カスタマーサクセス', 'その他'];
+const positions = ['経営者・役員', '部長クラス', '課長クラス', '係長・主任クラス', '一般社員', 'その他'];
+const prefectures = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+const allTags = ['DX推進', 'AI活用', 'セキュリティ', 'マーケティング', 'サステナビリティ', '人事・HR', 'ビジネス戦略', 'SaaS', 'データ分析', 'クラウド', '経営', '営業・CS', 'IoT', 'ロボティクス'];
+
+const inputClass = 'w-full rounded-lg border border-ehaco-border bg-white px-4 py-3 text-base focus:ring-2 focus:ring-accent/30 focus:border-accent transition';
+const selectClass = 'w-full rounded-lg border border-ehaco-border bg-white px-4 py-3 text-base focus:ring-2 focus:ring-accent/30 focus:border-accent transition appearance-none';
+const labelClass = 'block text-base font-semibold text-ehaco-text mb-1.5';
+const req = <span className="text-red-500 ml-0.5">*</span>;
 
 export default function AccountPage() {
+  const nameParts = user.name.split(/\s+/);
+  const [form, setForm] = useState({
+    lastNameKanji: nameParts[0] || '', firstNameKanji: nameParts[1] || '',
+    lastNameKana: 'スズキ', firstNameKana: 'イチロウ',
+    company: user.company, companyUrl: user.companyUrl, phone: user.phone,
+    zip1: '100', zip2: '0001', prefecture: '東京都', address: '千代田区千代田1-1',
+    industry: user.industry, bizType: 'BtoB', employees: user.employees,
+    revenue: '10億〜50億円', department: user.department, position: user.position,
+    tags: [...user.interests],
+  });
+  const [tagInput, setTagInput] = useState('');
+
+  const update = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
+  const addTag = (tag) => {
+    if (form.tags.length < 10 && !form.tags.includes(tag)) setForm((prev) => ({ ...prev, tags: [...prev.tags, tag] }));
+    setTagInput('');
+  };
+  const removeTag = (tag) => setForm((prev) => ({ ...prev, tags: prev.tags.filter((t) => t !== tag) }));
+  const filteredSuggestions = tagInput ? allTags.filter((t) => t.includes(tagInput) && !form.tags.includes(t)) : [];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 pb-20 sm:pb-8">
-      <MypageSidebar activePage="account" />
-      <div className="mt-6">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">アカウント設定</h1>
-            <div className="mt-2 h-1.5 w-16 bg-accent rounded-full" />
-          </div>
+    <div className="fade-in">
+      <div className="max-w-3xl">
+        <div className="mb-8">
+          <div className="h-1.5 w-16 bg-accent rounded-full mb-4" />
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-ehaco-text">アカウント設定</h1>
+        </div>
 
-          {/* Email */}
-          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
-              メールアドレス
-            </h2>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-500">現在のメールアドレス</p>
-                <p className="text-sm font-medium text-ehaco-text mt-1">
-                  {user.email}
-                </p>
-              </div>
-              <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg">
-                変更する
-              </button>
+        <div className="space-y-6">
+          {/* ID & Email */}
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className={labelClass}>利用者ID</label><p className="text-base text-muted bg-gray-50 rounded-lg px-4 py-3">47</p></div>
+              <div><label className={labelClass}>メールアドレス</label><p className="text-base text-muted bg-gray-50 rounded-lg px-4 py-3 truncate">{user.email}</p></div>
             </div>
           </div>
 
-          {/* Password */}
-          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
-              パスワード
-            </h2>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-500">現在のパスワード</p>
-                <p className="text-sm font-medium text-ehaco-text mt-1 tracking-widest">
-                  ••••••••••
-                </p>
-              </div>
-              <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg">
-                変更する
-              </button>
+          {/* Name */}
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6 space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div><label className={labelClass}>姓（全角漢字） {req}</label><input type="text" value={form.lastNameKanji} onChange={(e) => update('lastNameKanji', e.target.value)} className={inputClass} /></div>
+              <div><label className={labelClass}>名（全角漢字） {req}</label><input type="text" value={form.firstNameKanji} onChange={(e) => update('firstNameKanji', e.target.value)} className={inputClass} /></div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div><label className={labelClass}>姓（全角カナ） {req}</label><input type="text" value={form.lastNameKana} onChange={(e) => update('lastNameKana', e.target.value)} className={inputClass} /></div>
+              <div><label className={labelClass}>名（全角カナ） {req}</label><input type="text" value={form.firstNameKana} onChange={(e) => update('firstNameKana', e.target.value)} className={inputClass} /></div>
             </div>
           </div>
 
-          {/* External accounts */}
-          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 shadow-sm p-6 mb-6">
-            <h2 className="text-lg font-bold text-ehaco-text mb-4">
-              外部アカウント連携
-            </h2>
-            <div className="divide-y divide-ehaco-border">
-              {externalAccounts.map((account) => (
-                <div
-                  key={account.name}
-                  className="flex items-center justify-between py-4 first:pt-0 last:pb-0"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className={account.color}>{account.icon}</span>
-                    <div>
-                      <p className="text-sm font-medium text-ehaco-text">
-                        {account.name}
-                      </p>
-                      {account.connected && (
-                        <p className="text-xs text-green-600 flex items-center gap-1 mt-0.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
-                          連携済み
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  {account.connected ? (
-                    <button className="text-sm text-gray-500 hover:text-red-500 transition">
-                      連携を解除
-                    </button>
-                  ) : (
-                    <button className="text-sm font-medium text-accent hover:text-accent-light transition border border-accent hover:border-accent-light px-4 py-2 rounded-lg">
-                      連携する
-                    </button>
-                  )}
-                </div>
+          {/* Company */}
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6 space-y-4">
+            <div><label className={labelClass}>会社名 {req}</label><input type="text" value={form.company} onChange={(e) => update('company', e.target.value)} className={inputClass} placeholder="株式会社〇〇" /></div>
+            <div><label className={labelClass}>会社URL {req}</label><input type="url" value={form.companyUrl} onChange={(e) => update('companyUrl', e.target.value)} className={inputClass} /></div>
+            <div>
+              <label className={labelClass}>電話番号 {req}</label>
+              <input type="tel" value={form.phone} onChange={(e) => update('phone', e.target.value)} className={inputClass} />
+            </div>
+            <div>
+              <label className={labelClass}>所在地 {req}</label>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm text-muted">〒</span>
+                <input type="text" value={form.zip1} onChange={(e) => update('zip1', e.target.value)} className={`${inputClass} w-28`} maxLength={3} />
+                <span className="text-muted">ー</span>
+                <input type="text" value={form.zip2} onChange={(e) => update('zip2', e.target.value)} className={`${inputClass} w-32`} maxLength={4} />
+              </div>
+              <select value={form.prefecture} onChange={(e) => update('prefecture', e.target.value)} className={`${selectClass} mb-2`}>
+                <option value="">都道府県</option>
+                {prefectures.map((p) => <option key={p} value={p}>{p}</option>)}
+              </select>
+              <input type="text" value={form.address} onChange={(e) => update('address', e.target.value)} className={inputClass} placeholder="市区町村番地・ビル名" />
+            </div>
+          </div>
+
+          {/* Attributes */}
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6 space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className={labelClass}>業種 {req}</label><select value={form.industry} onChange={(e) => update('industry', e.target.value)} className={selectClass}><option value="">選択</option>{industries.map((v) => <option key={v}>{v}</option>)}</select></div>
+              <div><label className={labelClass}>ビジネス形態 {req}</label><select value={form.bizType} onChange={(e) => update('bizType', e.target.value)} className={selectClass}><option value="">選択</option>{bizTypes.map((v) => <option key={v}>{v}</option>)}</select></div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className={labelClass}>会社の従業員規模 {req}</label><select value={form.employees} onChange={(e) => update('employees', e.target.value)} className={selectClass}><option value="">選択</option>{employeeSizes.map((v) => <option key={v}>{v}</option>)}</select></div>
+              <div><label className={labelClass}>会社の年商規模 {req}</label><select value={form.revenue} onChange={(e) => update('revenue', e.target.value)} className={selectClass}><option value="">選択</option>{revenueSizes.map((v) => <option key={v}>{v}</option>)}</select></div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label className={labelClass}>担当領域（職種） {req}</label><select value={form.department} onChange={(e) => update('department', e.target.value)} className={selectClass}><option value="">選択</option>{departments.map((v) => <option key={v}>{v}</option>)}</select></div>
+              <div><label className={labelClass}>立場（役職） {req}</label><select value={form.position} onChange={(e) => update('position', e.target.value)} className={selectClass}><option value="">選択</option>{positions.map((v) => <option key={v}>{v}</option>)}</select></div>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-6">
+            <label className={labelClass}>興味のある分野タグ（最大10つまで）</label>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {form.tags.map((tag) => (
+                <span key={tag} className="inline-flex items-center gap-1 bg-accent/10 text-accent text-sm font-medium px-3 py-1 rounded-full">
+                  {tag}
+                  <button onClick={() => removeTag(tag)} className="hover:text-accent/70"><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                </span>
               ))}
             </div>
+            <div className="relative">
+              <input type="text" value={tagInput} onChange={(e) => setTagInput(e.target.value)} className={inputClass}
+                placeholder="興味のある分野タグを設定できます。キーワードを入力してみましょう！" disabled={form.tags.length >= 10} />
+              {filteredSuggestions.length > 0 && (
+                <div className="absolute left-0 right-0 top-full mt-1 bg-white rounded-lg border border-ehaco-border shadow-lg z-10 max-h-40 overflow-y-auto">
+                  {filteredSuggestions.map((tag) => (
+                    <button key={tag} onClick={() => addTag(tag)} className="w-full text-left px-3 py-2 text-sm text-ehaco-text hover:bg-accent/5 hover:text-accent transition">{tag}</button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <p className="text-xs text-muted mt-1">{form.tags.length}/10</p>
           </div>
 
-          {/* Account deletion */}
-          <div className="bg-white rounded-xl border-2 border-red-200 p-6">
-            <h2 className="text-lg font-bold text-red-600 mb-2">
-              アカウント削除
-            </h2>
-            <p className="text-sm text-gray-500 mb-4">
-              アカウントを削除すると、すべてのデータ（申込履歴、お気に入り、プロフィール情報など）が完全に削除され、復元することはできません。この操作は取り消せません。
-            </p>
-            <button className="text-sm font-medium text-white bg-red-500 hover:bg-red-600 transition px-6 py-2.5 rounded-lg">
-              アカウントを削除する
-            </button>
+          <div className="hidden sm:flex justify-end pb-8">
+            <button className="btn-gradient font-medium px-8 py-3 rounded-xl shadow-sm transition cursor-pointer active:scale-[0.97]">保存</button>
           </div>
+          {/* Mobile: sticky save button */}
+          <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-ehaco-border p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] z-40">
+            <button className="w-full btn-gradient font-medium py-3 rounded-xl shadow-sm transition cursor-pointer active:scale-[0.97]">保存</button>
+          </div>
+        </div>
       </div>
     </div>
   );

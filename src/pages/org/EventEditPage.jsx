@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { orgEvents } from '../../data/orgDummy';
 
 export default function EventEditPage() {
@@ -24,7 +24,7 @@ export default function EventEditPage() {
 
   const statusBadge = (status) => {
     const styles = {
-      '受付中': 'bg-green-100 text-green-700 border-green-200',
+      '公開中': 'bg-green-100 text-green-700 border-green-200',
       '公開前': 'bg-blue-100 text-blue-700 border-blue-200',
       '終了': 'bg-gray-100 text-gray-500 border-gray-200',
       '下書き': 'bg-yellow-100 text-yellow-700 border-yellow-200',
@@ -47,13 +47,23 @@ export default function EventEditPage() {
   return (
     <div className="fade-in">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-black text-ehaco-text border-l-4 border-accent pl-4">
-          イベント編集
-        </h1>
-        <p className="text-sm text-muted mt-2 pl-5">
-          {event.eventNo} - {event.title}
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-black text-ehaco-text border-l-4 border-accent pl-4">
+            イベント編集
+          </h1>
+          <p className="text-sm text-muted mt-2 pl-5">
+            {event.eventNo} - {event.title}
+          </p>
+        </div>
+        <Link to={`/org/events/${id}/preview`}
+          className="shrink-0 self-start sm:self-auto inline-flex items-center gap-2 border border-ehaco-border text-ehaco-text text-sm font-medium px-4 py-2 rounded-lg hover:border-accent hover:text-accent transition">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          プレビュー
+        </Link>
       </div>
 
       <div className="space-y-6">
@@ -163,7 +173,7 @@ export default function EventEditPage() {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-bold text-ehaco-text">
-                      {ticket.price === 0 ? '無料' : `${ticket.price.toLocaleString()}円`}
+                      定員 {ticket.capacity}名
                     </p>
                   </div>
                 </div>
@@ -194,7 +204,7 @@ export default function EventEditPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 pt-2">
-            {['下書き', '公開前', '受付中', '終了'].map((s) => (
+            {['下書き', '公開前', '公開中', '終了'].map((s) => (
               <button
                 key={s}
                 className={`text-xs font-medium px-4 py-2 rounded-lg border transition ${

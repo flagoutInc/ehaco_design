@@ -25,12 +25,12 @@ function VerticalCard({ event, className = '' }) {
         {/* Badges */}
         <div className="absolute left-3 top-3 flex gap-1.5">
           {event.isNew && (
-            <span className="rounded-lg bg-accent px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+            <span className="rounded-lg bg-accent px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
               NEW
             </span>
           )}
           {event.isDeadlineSoon && (
-            <span className="rounded-lg bg-red-500 px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+            <span className="rounded-lg bg-red-500 px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
               締め切り間近
             </span>
           )}
@@ -85,12 +85,12 @@ function HorizontalCard({ event }) {
         />
         <div className="absolute left-2 top-2 flex flex-col gap-1">
           {event.isNew && (
-            <span className="rounded-lg bg-accent px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+            <span className="rounded-lg bg-accent px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
               NEW
             </span>
           )}
           {event.isDeadlineSoon && (
-            <span className="rounded-lg bg-red-500 px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+            <span className="rounded-lg bg-red-500 px-2.5 py-1 text-xs font-semibold text-white shadow-sm">
               締め切り間近
             </span>
           )}
@@ -106,7 +106,7 @@ function HorizontalCard({ event }) {
               <img src={event.organizerLogo} alt={event.organizer} loading="lazy" className="h-5 w-5 rounded-full shrink-0" />
               <span className="text-xs md:text-sm text-muted truncate">{event.organizer}</span>
             </div>
-            <span className={`shrink-0 rounded-md px-2 py-0.5 text-[11px] font-medium ${formatColor}`}>
+            <span className={`shrink-0 rounded-md px-2 py-0.5 text-xs font-medium ${formatColor}`}>
               {formatLabel}
             </span>
           </div>

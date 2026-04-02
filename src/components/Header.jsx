@@ -63,18 +63,18 @@ export default function Header() {
           >
             イベントを探す
           </Link>
-          <a
-            href="https://ehaco.net/service/participants"
+          <Link
+            to="/about"
             className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >
             ehaco!とは
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/for-organizers"
             className="relative text-sm md:text-base font-medium text-muted hover:text-ehaco-text after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-accent after:transition-all hover:after:w-full"
           >
-            掲載希望の方
-          </a>
+            イベント掲載
+          </Link>
         </nav>
 
         {/* Right side */}
@@ -191,7 +191,7 @@ export default function Header() {
                 ))}
                 <div className="my-1 border-t border-ehaco-border" />
                 <Link
-                  to="/org/events"
+                  to="/org/dashboard"
                   className="flex items-center gap-3 px-4 py-2.5 text-base text-accent transition hover:bg-gray-50"
                   onClick={() => setUserMenuOpen(false)}
                 >
@@ -246,20 +246,20 @@ export default function Header() {
           >
             イベントを探す
           </Link>
-          <a
-            href="https://ehaco.net/service/participants"
+          <Link
+            to="/about"
             className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
             onClick={() => setMobileMenuOpen(false)}
           >
             ehaco!とは
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/for-organizers"
             className="block rounded-xl px-3 py-2.5 text-base font-medium text-ehaco-text hover:bg-gray-50 transition"
             onClick={() => setMobileMenuOpen(false)}
           >
-            掲載希望の方
-          </a>
+            イベント掲載
+          </Link>
         </nav>
 
         <div className="mx-4 border-t border-ehaco-border/50" />
@@ -273,8 +273,8 @@ export default function Header() {
             </div>
           </div>
           <nav className="space-y-1">
-            {['ダッシュボード', 'お知らせ', 'プロフィール', '設定'].map((label, i) => {
-              const paths = ['/mypage/dashboard', '/mypage/notifications', '/mypage/profile', '/mypage/settings'];
+            {['ダッシュボード', '申込済みイベント', 'お気に入り', 'フォロー中', 'お知らせ', 'プロフィール', '設定'].map((label, i) => {
+              const paths = ['/mypage/dashboard', '/mypage/events', '/mypage/favorites', '/mypage/following', '/mypage/notifications', '/mypage/profile', '/mypage/settings'];
               return (
                 <Link
                   key={label}
@@ -293,7 +293,7 @@ export default function Header() {
 
         <div className="px-4 py-3">
           <Link
-            to="/org/events"
+            to="/org/dashboard"
             className="block rounded-xl px-3 py-2.5 text-sm text-accent font-medium hover:bg-accent/5 transition"
             onClick={() => setMobileMenuOpen(false)}
           >

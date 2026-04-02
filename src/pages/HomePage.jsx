@@ -22,7 +22,7 @@ function useVisibleCount() {
 function SectionHeader({ enLabel, title, className = '' }) {
   return (
     <div className={className}>
-      <p className="text-[11px] font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">{enLabel}</p>
+      <p className="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-1.5">{enLabel}</p>
       <h2 className="text-2xl md:text-3xl font-black text-ehaco-text tracking-tight">{title}</h2>
     </div>
   )
@@ -328,7 +328,7 @@ function HomePage() {
               {deadlineSoonEvents.map((event) => (
                 <div key={event.id} className="relative">
                   <EventCard event={event} variant="vertical" />
-                  <div className="absolute top-3 right-3 bg-amber-500 text-white text-[11px] font-semibold px-3 py-1 rounded-lg shadow-md flex items-center gap-1.5">
+                  <div className="absolute top-3 right-3 bg-amber-500 text-white text-xs font-semibold px-3 py-1 rounded-lg shadow-md flex items-center gap-1.5">
                     <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>

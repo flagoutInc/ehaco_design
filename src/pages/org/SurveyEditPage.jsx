@@ -8,7 +8,6 @@ const MAX_OPTIONS = 10;
 const FORMAT_OPTIONS = [
   { value: 'single', label: '単一回答式' },
   { value: 'multiple', label: '複数回答式' },
-  { value: 'free', label: '自由記述式' },
 ];
 
 export default function SurveyEditPage() {
@@ -182,7 +181,7 @@ export default function SurveyEditPage() {
             </div>
 
             {/* Answer Options */}
-            {question.format !== 'free' && (
+            {(
               <div>
                 <label className="block text-sm font-medium text-muted mb-2">
                   選択肢（最大10問まで）
