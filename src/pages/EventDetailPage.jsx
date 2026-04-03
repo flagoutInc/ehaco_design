@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import MarkdownRenderer from '../components/MarkdownRenderer';
 import { events, speakers } from '../data/dummy';
 
 export default function EventDetailPage() {
@@ -27,17 +28,6 @@ export default function EventDetailPage() {
       {/* Title & meta card overlapping the image */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10">
         <div className="bg-white rounded-2xl shadow-lg ring-1 ring-ehaco-border/50 p-6 md:p-8">
-          {/* Back link */}
-          <button
-            onClick={() => window.history.back()}
-            className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-ehaco-text transition-colors mb-4"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            戻る
-          </button>
-
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-3">
             {event.tags.map((tag) => (
@@ -94,78 +84,12 @@ export default function EventDetailPage() {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Left Column */}
           <div className="flex-1 max-w-3xl min-w-0">
-            {/* Event Overview */}
+            {/* Event Body (Markdown) */}
             <section className="mb-6 md:mb-8">
               <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
                 イベント概要
               </h2>
-              <div className="text-base leading-relaxed text-gray-600 space-y-4">
-                <p>
-                  デジタルトランスフォーメーション（DX）が企業の競争力を左右する時代において、データの活用は避けて通れない経営課題となっています。
-                  本セミナーでは、DX推進の最前線で活躍する専門家が、データ活用戦略の立案から実行までの具体的なプロセスを解説します。
-                </p>
-                <p>
-                  先進企業の成功事例を交えながら、組織全体でデータドリブンな意思決定を実現するためのフレームワークや、
-                  AI・機械学習を活用した業務効率化の最新アプローチについてもご紹介します。
-                  経営層からIT部門、事業部門まで幅広い方々にご参加いただける内容です。
-                </p>
-                <p>
-                  セミナー後半では、参加者同士のディスカッションタイムも設けております。
-                  同じ課題を抱える他社の担当者との情報交換の場としてもぜひご活用ください。
-                </p>
-              </div>
-            </section>
-
-            {/* Recommended For */}
-            <section className="mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
-                こんな方におすすめ
-              </h2>
-              <div className="bg-accent/5 rounded-2xl p-4 md:p-6">
-                <ul className="space-y-3">
-                  {[
-                    'DX推進を担当している方',
-                    'データ活用に課題を感じている経営者・管理職',
-                    'データドリブン経営に関心のある方',
-                    'AIや機械学習を業務に活用したい方',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-gray-700">
-                      <svg
-                        className="w-5 h-5 text-accent flex-shrink-0 mt-0.5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-
-            {/* Event Details Table */}
-            <section className="mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-ehaco-text mb-4 pl-3 border-l-4 border-accent">
-                開催概要
-              </h2>
-              <dl className="grid grid-cols-[auto_1fr] gap-x-4 md:gap-x-8 gap-y-4 md:gap-y-6 text-sm">
-                <dt className="font-bold text-ehaco-text">日時</dt>
-                <dd className="text-gray-600">{event.date}</dd>
-
-                <dt className="font-bold text-ehaco-text">会場</dt>
-                <dd className="text-gray-600">{event.location}</dd>
-
-                <dt className="font-bold text-ehaco-text">定員</dt>
-                <dd className="text-gray-600">200名（先着順）</dd>
-
-                <dt className="font-bold text-ehaco-text">申込締切</dt>
-                <dd className="text-gray-600">{event.deadline}</dd>
-
-                <dt className="font-bold text-ehaco-text">主催</dt>
-                <dd className="text-gray-600">{event.organizer}</dd>
-              </dl>
+              <MarkdownRenderer>{event.body || event.description || ''}</MarkdownRenderer>
             </section>
 
             {/* Speakers */}

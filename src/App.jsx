@@ -27,6 +27,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import ApplyPage from './pages/ApplyPage'
 import ApplyCompletePage from './pages/ApplyCompletePage'
 import OrganizerProfilePage from './pages/OrganizerProfilePage'
+import OrganizersPage from './pages/OrganizersPage'
 import AboutPage from './pages/AboutPage'
 import ForOrganizersPage from './pages/ForOrganizersPage'
 import CompanyInfoPage from './pages/CompanyInfoPage'
@@ -175,6 +176,7 @@ function App() {
         <Route path="/event/:id" element={<EventDetailPage />} />
         <Route path="/event/:id/apply" element={<ApplyPage />} />
         <Route path="/event/:id/apply/complete" element={<ApplyCompletePage />} />
+        <Route path="/organizers" element={<OrganizersPage />} />
         <Route path="/organizer/:id" element={<OrganizerProfilePage />} />
         <Route path="/mypage" element={<MypageLayout />}>
           <Route path="dashboard" element={<DashboardPage />} />

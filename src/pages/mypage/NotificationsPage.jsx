@@ -7,9 +7,12 @@ const typeColors = {
   organizer: 'bg-green-500', system: 'bg-gray-400',
 };
 
+const PER_PAGE = 10;
+
 export default function NotificationsPage() {
   const [readState, setReadState] = useState(() => new Map(notifData.map((n) => [n.id, n.read])));
   const [filter, setFilter] = useState('all');
+  const [page, setPage] = useState(1);
 
   const unreadCount = [...readState.values()].filter((v) => !v).length;
   const markAsRead = (id) => setReadState((prev) => { const next = new Map(prev); next.set(id, true); return next; });
@@ -17,6 +20,11 @@ export default function NotificationsPage() {
   const markAllAsRead = () => setReadState((prev) => { const next = new Map(prev); for (const k of next.keys()) next.set(k, true); return next; });
 
   const filtered = filter === 'unread' ? notifData.filter((n) => !readState.get(n.id)) : notifData;
+  const totalPages = Math.ceil(filtered.length / PER_PAGE);
+  const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+
+  const changePage = (p) => { setPage(p); window.scrollTo(0, 0); };
+  const changeFilter = (f) => { setFilter(f); setPage(1); };
 
   return (
     <div className="fade-in">
@@ -45,7 +53,7 @@ export default function NotificationsPage() {
       {/* Filter pills */}
       <div className="flex gap-2 mb-6">
         {[{ key: 'all', label: 'すべて' }, { key: 'unread', label: '未読のみ' }].map((t) => (
-          <button key={t.key} onClick={() => setFilter(t.key)}
+          <button key={t.key} onClick={() => changeFilter(t.key)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition ${
               filter === t.key
                 ? 'bg-accent text-white shadow-sm'
@@ -57,9 +65,9 @@ export default function NotificationsPage() {
       </div>
 
       {/* List */}
-      {filtered.length > 0 ? (
+      {paged.length > 0 ? (
         <div className="space-y-2">
-          {filtered.map((notif) => {
+          {paged.map((notif) => {
             const isRead = readState.get(notif.id);
             const link = getNotifLink(notif);
             const cls = `w-full text-left flex items-start gap-4 p-4 rounded-xl transition hover:shadow-md cursor-pointer ${
@@ -88,7 +96,47 @@ export default function NotificationsPage() {
             );
           })}
         </div>
-      ) : (
+      ) : null}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 mt-8">
+          <button
+            onClick={() => changePage(page - 1)}
+            disabled={page === 1}
+            className="px-3 py-2 rounded-lg text-sm font-medium transition disabled:opacity-30 disabled:cursor-not-allowed text-muted hover:bg-gray-100"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <button
+              key={p}
+              onClick={() => changePage(p)}
+              className={`w-9 h-9 rounded-lg text-sm font-medium transition ${
+                p === page ? 'bg-accent text-white shadow-sm' : 'text-muted hover:bg-gray-100'
+              }`}
+            >
+              {p}
+            </button>
+          ))}
+          <button
+            onClick={() => changePage(page + 1)}
+            disabled={page === totalPages}
+            className="px-3 py-2 rounded-lg text-sm font-medium transition disabled:opacity-30 disabled:cursor-not-allowed text-muted hover:bg-gray-100"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      )}
+
+      {/* 件数表示 */}
+      {filtered.length > 0 && (
+        <p className="text-center text-xs text-muted mt-3">
+          {filtered.length}件中 {(page - 1) * PER_PAGE + 1}〜{Math.min(page * PER_PAGE, filtered.length)}件を表示
+        </p>
+      )}
+
+      {filtered.length === 0 && (
         <div className="bg-white rounded-2xl ring-1 ring-ehaco-border/50 p-12 text-center">
           <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-accent/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>

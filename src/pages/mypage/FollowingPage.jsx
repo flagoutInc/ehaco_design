@@ -22,6 +22,10 @@ export default function FollowingPage() {
           <h1 className="text-2xl md:text-3xl font-black text-ehaco-text">フォロー中</h1>
           <span className="text-sm text-muted bg-gray-100 px-2.5 py-0.5 rounded-full font-medium">{following.size}社</span>
         </div>
+        <Link to="/organizers" className="text-sm font-medium text-accent hover:text-accent-light transition flex items-center gap-1">
+          主催者を探す
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+        </Link>
       </div>
 
       <div className="space-y-3">

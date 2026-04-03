@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import MarkdownRenderer from '../../components/MarkdownRenderer';
 
 const stepLabels = ['基本情報', '開催・チケット', '設定', '公開', '確認'];
 
@@ -30,7 +31,7 @@ export default function NewEventPage() {
   const [form, setForm] = useState({
     eventName: '', startDate: '', startTime: '', endDate: '', endTime: '',
     recruitStartDate: '', recruitStartTime: '', recruitEndDate: '', recruitEndTime: '',
-    eventImage: null, eventImagePreview: '', eventDetail: '',
+    eventImage: null, eventImagePreview: '', eventDetail: '', detailPreview: false,
     isOffline: false, isOnline: false, venueName: '', venueAddress: '', onlineTool: '', streamUrl: '',
     ticketMode: 'ticket', externalTicketUrl: '', tickets: [{ name: '', quantity: '' }],
     companyName: '', privacyPolicyUrl: '',
@@ -91,7 +92,21 @@ export default function NewEventPage() {
                 <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
               </label>
             </div>
-            <div><label className={labelClass}>イベント詳細 <span className="text-red-500">*</span></label><textarea className={`${inputClass} min-h-[160px]`} placeholder="イベントの詳細を入力" value={form.eventDetail} onChange={(e) => set('eventDetail', e.target.value)} /></div>
+            <div>
+              <label className={labelClass}>イベント詳細 <span className="text-red-500">*</span></label>
+              <div className="flex items-center gap-1 mb-2">
+                <button type="button" onClick={() => set('detailPreview', false)} className={`px-3 py-1 text-xs font-medium rounded-md transition ${!form.detailPreview ? 'bg-accent text-white' : 'bg-gray-100 text-muted hover:bg-gray-200'}`}>編集</button>
+                <button type="button" onClick={() => set('detailPreview', true)} className={`px-3 py-1 text-xs font-medium rounded-md transition ${form.detailPreview ? 'bg-accent text-white' : 'bg-gray-100 text-muted hover:bg-gray-200'}`}>プレビュー</button>
+                <span className="ml-2 text-[11px] text-muted/60">Markdown記法が使えます</span>
+              </div>
+              {form.detailPreview ? (
+                <div className={`${inputClass} min-h-[160px]`}>
+                  {form.eventDetail ? <MarkdownRenderer className="prose-sm">{form.eventDetail}</MarkdownRenderer> : <p className="text-muted/50">プレビューする内容がありません</p>}
+                </div>
+              ) : (
+                <textarea className={`${inputClass} min-h-[160px] font-mono text-sm`} placeholder={"イベントの詳細をMarkdownで入力\n\n例:\n## プログラム\n1. **基調講演**（14:00〜14:50）\n2. パネルディスカッション\n\n> 参加者同士の交流タイムもあります"} value={form.eventDetail} onChange={(e) => set('eventDetail', e.target.value)} />
+              )}
+            </div>
           </section>
         )}
 

@@ -127,8 +127,10 @@ export default function Header() {
                   {notifData.slice(0, 5).map((notif) => {
                     const isRead = notif.read || readIds.has(notif.id);
                     return (
-                      <div
+                      <Link
                         key={notif.id}
+                        to={`/mypage/notifications/${notif.id}`}
+                        onClick={() => setNotifOpen(false)}
                         className={`flex gap-3 border-b border-ehaco-border/50 px-5 py-4 transition last:border-b-0 hover:bg-gray-50 ${
                           !isRead ? 'bg-accent/5' : ''
                         }`}
@@ -139,7 +141,7 @@ export default function Header() {
                           <p className="mt-0.5 line-clamp-2 text-sm text-muted">{notif.message}</p>
                           <p className="mt-1 text-xs text-muted/70">{notif.dateRelative}</p>
                         </div>
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>
